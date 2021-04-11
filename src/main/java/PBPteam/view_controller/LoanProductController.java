@@ -35,7 +35,6 @@ public class LoanProductController implements Initializable {
     private TextField inventoryTextField;
     @FXML
     private TextField timeTextField;
-    //public static ObservableList<Product> associatedProducts = FXCollections.observableArrayList();
     @FXML
     void handleCancelLoanProduct(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
