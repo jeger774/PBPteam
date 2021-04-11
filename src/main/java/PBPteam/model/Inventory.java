@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 public class Inventory {
     private static ObservableList<Part> partsInventory = FXCollections.observableArrayList();
     private static ObservableList<Product> productsInventory = FXCollections.observableArrayList();
+    private static ObservableList<Loan> loansInventory = FXCollections.observableArrayList();
     //termék kezelés
     public static ObservableList<Product> getProductsInventory(){
         return productsInventory;
@@ -85,6 +86,42 @@ public class Inventory {
     public static void updatePart(int partNum, Part part){
         partsInventory.set(partNum, part);
     }
+    //kölcsön kezelés
+    public static ObservableList<Loan> getLoansInventory(){ return loansInventory; }
+    public static void addLoan(Loan loan){
+        loansInventory.add(loan);
+    }
+    public static void removeLoan(Loan loan){
+        loansInventory.remove(loan);
+    }
+    public static int lookupLoan(String searchItem){
+        boolean isFound = false;
+        int index = 0;
+        if(isInteger(searchItem) == true){
+            for(int i =0; i<loansInventory.size(); i++){
+                if(Integer.parseInt(searchItem) == loansInventory.get(i).getProductId()){
+                    index = i;
+                    isFound = true;
+                }
+            }
+        }
+        else{
+            for(int i =0; i<loansInventory.size(); i++) {
+                if (searchItem.equals(loansInventory.get(i).getName()))
+                    index = i;
+                isFound = true;
+            }
+        }
+        if(isFound = true){
+            return index;
+        }
+        else {
+            System.out.println("Nem található termék.");
+            return -1;
+        }
+    }
+    //kölcsön frissítés metódus (ExtendLoanProduct)
+    public static void updateLoan(int loanNum, Loan loan){ loansInventory.set(loanNum, loan); }
     public static boolean isInteger(String inputItem){
         try{
             Integer.parseInt(inputItem);

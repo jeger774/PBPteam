@@ -153,7 +153,7 @@
                      </tooltip>
                   </TextField>
                   <Button layoutX="191.0" layoutY="83.0" mnemonicParsing="false" onAction="#handleLoanSearch" prefHeight="25.0" prefWidth="92.0" text="Keresés" />
-                  <Button layoutX="27.0" layoutY="632.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="116.0" text="Meghosszabbít">
+                  <Button layoutX="27.0" layoutY="632.0" mnemonicParsing="false" onAction="#handleGoToExtendLoan" prefHeight="59.0" prefWidth="116.0" text="Meghosszabbít">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -161,7 +161,7 @@
                         <Tooltip text="Kölcsönzés hátralévő idejének meghosszabbítása" />
                      </tooltip>
                   </Button>
-                  <Button layoutX="371.0" layoutY="632.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="72.0" text="Törlés">
+                  <Button layoutX="371.0" layoutY="632.0" mnemonicParsing="false" onAction="#handleDeleteLoan" prefHeight="59.0" prefWidth="72.0" text="Törlés">
                      <font>
                         <Font size="14.0" />
                      </font>

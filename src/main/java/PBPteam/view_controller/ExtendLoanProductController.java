@@ -1,7 +1,6 @@
 package PBPteam.view_controller;
 import PBPteam.model.Inventory;
 import PBPteam.model.Loan;
-import PBPteam.model.Product;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +20,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class LoanProductController implements Initializable {
+public class ExtendLoanProductController implements Initializable {
     @FXML
     private AnchorPane loanProductId;
     @FXML
@@ -37,12 +36,12 @@ public class LoanProductController implements Initializable {
     @FXML
     private TextField timeTextField;
     @FXML
-    void handleCancelLoanProduct(ActionEvent event) throws IOException {
+    void handleCancelExtendLoanProduct(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.initModality(Modality.NONE);
-        alert.setTitle("Kölcsönzés visszavonása");
+        alert.setTitle("Módosítások visszavonása");
         alert.setHeaderText("Megerősítés");
-        alert.setContentText("Biztosan vissza akarja vonni a kölcsönzést?");
+        alert.setContentText("Biztosan vissza akarja vonni a módosításokat?");
         Optional<ButtonType> outcome = alert.showAndWait();
         if(outcome.get() == ButtonType.OK) {
             Parent loanProductScreen = FXMLLoader.load(getClass().getResource("Main.fxml"));
@@ -53,13 +52,13 @@ public class LoanProductController implements Initializable {
         }
     }
     @FXML
-    void handleSaveLoanProduct(ActionEvent event) throws IOException {
+    void handleSaveExtendLoanProduct(ActionEvent event) throws IOException {
         Loan loan = new Loan();
         loan.setProductId(Integer.parseInt(idTextField.getText()));
         loan.setName(productTextField.getText());
         loan.setStock(Integer.parseInt(inventoryTextField.getText()));
         loan.setTimeLeft(timeTextField.getText());
-        Inventory.addLoan(loan);
+        Inventory.updateLoan(MainController.getExtendLoanIndex(), loan);
         Parent loanProductScreen = FXMLLoader.load(getClass().getResource("Main.fxml"));
         Scene loanProductScene = new Scene(loanProductScreen);
         Stage loanProductStage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -69,11 +68,11 @@ public class LoanProductController implements Initializable {
     //megnyitáskor a mezők inicializálása
     @Override
     public void initialize (URL url, ResourceBundle rb){
-        Product productToBeLoaned = Inventory.getProductsInventory().get(MainController.getLoanProductIndex());
-        idTextField.setText(String.valueOf(productToBeLoaned.getProductId()));
-        productTextField.setText(productToBeLoaned.getName());
-        inventoryTextField.setText(String.valueOf(productToBeLoaned.getStock()));
-        timeTextField.setText("7 nap");
+        Loan loanToBeExtended = Inventory.getLoansInventory().get(MainController.getExtendLoanIndex());
+        idTextField.setText(String.valueOf(loanToBeExtended.getProductId()));
+        productTextField.setText(loanToBeExtended.getName());
+        inventoryTextField.setText(String.valueOf(loanToBeExtended.getStock()));
+        timeTextField.setText(String.valueOf(loanToBeExtended.getTimeLeft()));
     }
 }
 

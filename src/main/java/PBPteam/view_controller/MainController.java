@@ -2,6 +2,7 @@ package PBPteam.view_controller;
 import PBPteam.model.Inventory;
 import PBPteam.model.Part;
 import PBPteam.model.Product;
+import PBPteam.model.Loan;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -58,7 +59,7 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn<Part, Double> priceProductsUnitColumn;
     @FXML
-    private TableView<Product> tvLoan;
+    private TableView<Loan> tvLoan;
     @FXML
     private TableColumn<Part, Integer> loanIDColumn;
     @FXML
@@ -66,10 +67,11 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn<Part, Integer> countLoanUnitColumn;
     @FXML
-    private TableColumn<Part, Double> timeLoanUnitColumn;
+    private TableColumn<Part, String> timeLoanUnitColumn;
     //
     private static int modifyPartIndex;
     private static int modifyProductIndex;
+    private static int extendLoanIndex;
     private static int loanProductIndex;
     public static int getModifyPartIndex(){
         return modifyPartIndex;
@@ -77,9 +79,13 @@ public class MainController implements Initializable {
     public static int getModifyProductIndex(){
         return modifyProductIndex;
     }
+    public static int getExtendLoanIndex(){
+        return extendLoanIndex;
+    }
     public static int getLoanProductIndex(){ return loanProductIndex; }
     private static Part modifiedPart;
     private static Product modifiedProduct;
+    private static Loan extendedLoan;
     private static Product loanedProduct;
     //
     @FXML
@@ -92,6 +98,9 @@ public class MainController implements Initializable {
             alert.setHeaderText("Nem található ilyen alkatrész.");
             alert.setContentText("A megadott keresőszóra nincs egyező alkatrész.");
             alert.showAndWait();
+        }
+        else if(searchedPart==""){
+            tvParts.setItems(Inventory.getPartsInventory());
         }
         else{
             tvPartIndex = Inventory.lookupPart(searchedPart);
@@ -145,6 +154,9 @@ public class MainController implements Initializable {
             alert.setHeaderText("Nem található ilyen termék.");
             alert.setContentText("A megadott keresőszóra nincs egyező termék.");
             alert.showAndWait();
+        }
+        else if(searchedProduct==""){
+            tvProducts.setItems(Inventory.getProductsInventory());
         }
         else{
             tvProductIndex = Inventory.lookupProduct(searchedProduct);
@@ -201,22 +213,52 @@ public class MainController implements Initializable {
         loanProductStage.show();
     }
     @FXML
+    private void handleGoToExtendLoan(ActionEvent event)throws IOException{
+        Loan tempLoan = tvLoan.getSelectionModel().getSelectedItem();
+        extendLoanIndex = Inventory.getLoansInventory().indexOf(tempLoan);
+        Parent extendLoanProductScreen = FXMLLoader.load(getClass().getResource("ExtendLoanProduct.fxml"));
+        Scene extendloanProductScene = new Scene(extendLoanProductScreen);
+        Stage extendloanProductStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        extendloanProductStage.setScene((extendloanProductScene));
+        extendloanProductStage.show();
+        extendedLoan = tvLoan.getSelectionModel().getSelectedItem();
+    }
+    @FXML
     private void handleLoanSearch(ActionEvent event){
-        String searchedProduct = loanSearchField.getText();
+        String searchedLoan = loanSearchField.getText();
         int tvLoanIndex;
-        if(Inventory.lookupPart(searchedProduct) == -1){
+        if(Inventory.lookupLoan(searchedLoan) == -1){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Hiba a keresésben!");
             alert.setHeaderText("Nem található ilyen kölcsönzés.");
             alert.setContentText("A megadott keresőszóra nincs egyező kölcsönzés.");
             alert.showAndWait();
         }
+        else if(searchedLoan==""){
+            tvLoan.setItems(Inventory.getLoansInventory());
+        }
         else{
-            tvLoanIndex = Inventory.lookupProduct(searchedProduct);
-            Product tempSearchLoan = Inventory.getProductsInventory().get(tvLoanIndex);
-            ObservableList<Product> tempObservableList = FXCollections.observableArrayList();
+            tvLoanIndex = Inventory.lookupProduct(searchedLoan);
+            Loan tempSearchLoan = Inventory.getLoansInventory().get(tvLoanIndex);
+            ObservableList<Loan> tempObservableList = FXCollections.observableArrayList();
             tempObservableList.add(tempSearchLoan);
             tvLoan.setItems(tempObservableList);
+        }
+    }
+    @FXML
+    private void handleDeleteLoan(ActionEvent event){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.initModality(Modality.NONE);
+        alert.setTitle("Törlés megerősítése");
+        alert.setHeaderText("Megerősítés");
+        alert.setContentText("Biztosan törölni szeretné?");
+        Optional<ButtonType> outcome = alert.showAndWait();
+        if(outcome.get() == ButtonType.OK) {
+            Inventory.removeLoan(tvLoan.getSelectionModel().getSelectedItem());
+            loanIDColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("productId"));
+            loanNameColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("name"));
+            countLoanUnitColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("stock"));
+            timeLoanUnitColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("timeLeft"));
         }
     }
     @FXML
@@ -240,6 +282,12 @@ public class MainController implements Initializable {
         inventoryProductsColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("stock"));
         priceProductsUnitColumn.setCellValueFactory(new PropertyValueFactory<Part, Double>("price"));
         tvProducts.setItems(Inventory.getProductsInventory());
+        //kölcsönzések betöltése
+        loanIDColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("productId"));
+        loanNameColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("name"));
+        countLoanUnitColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("stock"));
+        timeLoanUnitColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("timeLeft"));
+        tvLoan.setItems(Inventory.getLoansInventory());
     }
 }
 
