@@ -1,8 +1,7 @@
 # PBPteam
-![GitHub Logo](/images/logo.png)
-[GitHub](http://github.com/jeger774/PBPteam)
-## Sports rental and repair shop inventory management software.
-### Changelog:
+##[GitHub](http://github.com/jeger774/PBPteam)
+### Sports rental and repair shop inventory management software.
+#### Changelog:
 * UI updated
 * removed _some_ unnecessary lines of code
   * fixed searching in tables
