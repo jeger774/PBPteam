@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Inventory-Management-System-JavaFX--master.iml" filepath="$PROJECT_DIR$/Inventory-Management-System-JavaFX--master.iml" />
-      <module fileurl="file://$PROJECT_DIR$/InventorySystem.iml" filepath="$PROJECT_DIR$/InventorySystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PBPteam.iml" filepath="$PROJECT_DIR$/PBPteam.iml" />
     </modules>
   </component>
 </project>
