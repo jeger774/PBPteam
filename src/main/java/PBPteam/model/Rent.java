@@ -2,9 +2,9 @@ package PBPteam.model;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Loan extends Product {
+public class Rent extends Product {
     private final StringProperty timeLeft;
-    public Loan() {
+    public Rent() {
         super();
         timeLeft = new SimpleStringProperty();
     }

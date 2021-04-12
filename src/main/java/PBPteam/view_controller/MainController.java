@@ -2,7 +2,7 @@ package PBPteam.view_controller;
 import PBPteam.model.Inventory;
 import PBPteam.model.Part;
 import PBPteam.model.Product;
-import PBPteam.model.Loan;
+import PBPteam.model.Rent;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,9 +35,9 @@ public class MainController implements Initializable {
     @FXML
     private TextField productsSearchField;
     @FXML
-    private Button loanSearchButton;
+    private Button rentSearchButton;
     @FXML
-    private TextField loanSearchField;
+    private TextField rentSearchField;
     @FXML
     private TableView<Part> tvParts;
     @FXML
@@ -59,34 +59,34 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn<Part, Double> priceProductsUnitColumn;
     @FXML
-    private TableView<Loan> tvLoan;
+    private TableView<Rent> tvRent;
     @FXML
-    private TableColumn<Part, Integer> loanIDColumn;
+    private TableColumn<Part, Integer> rentIDColumn;
     @FXML
-    private TableColumn<Part, String> loanNameColumn;
+    private TableColumn<Part, String> rentNameColumn;
     @FXML
-    private TableColumn<Part, Integer> countLoanUnitColumn;
+    private TableColumn<Part, Integer> countRentUnitColumn;
     @FXML
-    private TableColumn<Part, String> timeLoanUnitColumn;
+    private TableColumn<Part, String> timeRentUnitColumn;
     //
     private static int modifyPartIndex;
     private static int modifyProductIndex;
-    private static int extendLoanIndex;
-    private static int loanProductIndex;
+    private static int extendRentIndex;
+    private static int rentProductIndex;
     public static int getModifyPartIndex(){
         return modifyPartIndex;
     }
     public static int getModifyProductIndex(){
         return modifyProductIndex;
     }
-    public static int getExtendLoanIndex(){
-        return extendLoanIndex;
+    public static int getExtendRentIndex(){
+        return extendRentIndex;
     }
-    public static int getLoanProductIndex(){ return loanProductIndex; }
+    public static int getRentProductIndex(){ return rentProductIndex; }
     private static Part modifiedPart;
     private static Product modifiedProduct;
-    private static Loan extendedLoan;
-    private static Product loanedProduct;
+    private static Rent extendedRent;
+    private static Product rentedProduct;
     //
     @FXML
     private void handlePartSearch(ActionEvent event){
@@ -99,7 +99,7 @@ public class MainController implements Initializable {
             alert.setContentText("A megadott keresőszóra nincs egyező alkatrész.");
             alert.showAndWait();
         }
-        else if(searchedPart==""){
+        else if(searchedPart.equals("")){
             tvParts.setItems(Inventory.getPartsInventory());
         }
         else{
@@ -130,10 +130,10 @@ public class MainController implements Initializable {
         Optional<ButtonType> outcome = alert.showAndWait();
         if(outcome.get() == ButtonType.OK) {
             Inventory.removePart(tvParts.getSelectionModel().getSelectedItem());
-            partsIDColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("partId"));
-            partsNameColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("name"));
-            inventoryPartsColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("stock"));
-            pricePartUnitColumn.setCellValueFactory(new PropertyValueFactory<Part, Double>("price"));
+            partsIDColumn.setCellValueFactory(new PropertyValueFactory<>("partId"));
+            partsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+            inventoryPartsColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
+            pricePartUnitColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         }
     }
     @FXML
@@ -155,7 +155,7 @@ public class MainController implements Initializable {
             alert.setContentText("A megadott keresőszóra nincs egyező termék.");
             alert.showAndWait();
         }
-        else if(searchedProduct==""){
+        else if(searchedProduct.equals("")){
             tvProducts.setItems(Inventory.getProductsInventory());
         }
         else{
@@ -196,57 +196,57 @@ public class MainController implements Initializable {
         Optional<ButtonType> outcome = alert.showAndWait();
         if(outcome.get() == ButtonType.OK) {
             Inventory.removeProduct(tvProducts.getSelectionModel().getSelectedItem());
-            productsIDColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("productId"));
-            productsNameColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("name"));
-            inventoryProductsColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("stock"));
-            priceProductsUnitColumn.setCellValueFactory(new PropertyValueFactory<Part, Double>("price"));
+            productsIDColumn.setCellValueFactory(new PropertyValueFactory<>("productId"));
+            productsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+            inventoryProductsColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
+            priceProductsUnitColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         }
     }
     @FXML
-    public void handleGoToLoanProduct(ActionEvent event)throws IOException{
+    public void handleGoToRentProduct(ActionEvent event)throws IOException{
         Product tempProduct = tvProducts.getSelectionModel().getSelectedItem();
-        loanProductIndex = Inventory.getProductsInventory().indexOf(tempProduct);
-        Parent loanProductScreen = FXMLLoader.load(getClass().getResource("LoanProduct.fxml"));
-        Scene loanProductScene = new Scene(loanProductScreen);
-        Stage loanProductStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        loanProductStage.setScene((loanProductScene));
-        loanProductStage.show();
+        rentProductIndex = Inventory.getProductsInventory().indexOf(tempProduct);
+        Parent rentProductScreen = FXMLLoader.load(getClass().getResource("RentProduct.fxml"));
+        Scene rentProductScene = new Scene(rentProductScreen);
+        Stage rentProductStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        rentProductStage.setScene((rentProductScene));
+        rentProductStage.show();
     }
     @FXML
-    private void handleGoToExtendLoan(ActionEvent event)throws IOException{
-        Loan tempLoan = tvLoan.getSelectionModel().getSelectedItem();
-        extendLoanIndex = Inventory.getLoansInventory().indexOf(tempLoan);
-        Parent extendLoanProductScreen = FXMLLoader.load(getClass().getResource("ExtendLoanProduct.fxml"));
-        Scene extendloanProductScene = new Scene(extendLoanProductScreen);
-        Stage extendloanProductStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        extendloanProductStage.setScene((extendloanProductScene));
-        extendloanProductStage.show();
-        extendedLoan = tvLoan.getSelectionModel().getSelectedItem();
+    private void handleGoToExtendRent(ActionEvent event)throws IOException{
+        Rent tempRent = tvRent.getSelectionModel().getSelectedItem();
+        extendRentIndex = Inventory.getRentInventory().indexOf(tempRent);
+        Parent extendRentProductScreen = FXMLLoader.load(getClass().getResource("ExtendRentProduct.fxml"));
+        Scene extendRentProductScene = new Scene(extendRentProductScreen);
+        Stage extendRentProductStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        extendRentProductStage.setScene((extendRentProductScene));
+        extendRentProductStage.show();
+        extendedRent = tvRent.getSelectionModel().getSelectedItem();
     }
     @FXML
-    private void handleLoanSearch(ActionEvent event){
-        String searchedLoan = loanSearchField.getText();
-        int tvLoanIndex;
-        if(Inventory.lookupLoan(searchedLoan) == -1){
+    private void handleRentSearch(ActionEvent event){
+        String searchedRent = rentSearchField.getText();
+        int tvRentIndex;
+        if(Inventory.lookupRent(searchedRent) == -1){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Hiba a keresésben!");
             alert.setHeaderText("Nem található ilyen kölcsönzés.");
             alert.setContentText("A megadott keresőszóra nincs egyező kölcsönzés.");
             alert.showAndWait();
         }
-        else if(searchedLoan==""){
-            tvLoan.setItems(Inventory.getLoansInventory());
+        else if(searchedRent.equals("")){
+            tvRent.setItems(Inventory.getRentInventory());
         }
         else{
-            tvLoanIndex = Inventory.lookupProduct(searchedLoan);
-            Loan tempSearchLoan = Inventory.getLoansInventory().get(tvLoanIndex);
-            ObservableList<Loan> tempObservableList = FXCollections.observableArrayList();
-            tempObservableList.add(tempSearchLoan);
-            tvLoan.setItems(tempObservableList);
+            tvRentIndex = Inventory.lookupProduct(searchedRent);
+            Rent tempSearchRent = Inventory.getRentInventory().get(tvRentIndex);
+            ObservableList<Rent> tempObservableList = FXCollections.observableArrayList();
+            tempObservableList.add(tempSearchRent);
+            tvRent.setItems(tempObservableList);
         }
     }
     @FXML
-    private void handleDeleteLoan(ActionEvent event){
+    private void handleDeleteRent(ActionEvent event){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.initModality(Modality.NONE);
         alert.setTitle("Törlés megerősítése");
@@ -254,11 +254,11 @@ public class MainController implements Initializable {
         alert.setContentText("Biztosan törölni szeretné?");
         Optional<ButtonType> outcome = alert.showAndWait();
         if(outcome.get() == ButtonType.OK) {
-            Inventory.removeLoan(tvLoan.getSelectionModel().getSelectedItem());
-            loanIDColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("productId"));
-            loanNameColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("name"));
-            countLoanUnitColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("stock"));
-            timeLoanUnitColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("timeLeft"));
+            Inventory.removeRent(tvRent.getSelectionModel().getSelectedItem());
+            rentIDColumn.setCellValueFactory(new PropertyValueFactory<>("productId"));
+            rentNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+            countRentUnitColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
+            timeRentUnitColumn.setCellValueFactory(new PropertyValueFactory<>("timeLeft"));
         }
     }
     @FXML
@@ -271,23 +271,23 @@ public class MainController implements Initializable {
     @Override
     public void initialize (URL url, ResourceBundle rb){
         //alkatrészek betöltése
-        partsIDColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("partId"));
-        partsNameColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("name"));
-        inventoryPartsColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("stock"));
-        pricePartUnitColumn.setCellValueFactory(new PropertyValueFactory<Part, Double>("price"));
+        partsIDColumn.setCellValueFactory(new PropertyValueFactory<>("partId"));
+        partsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        inventoryPartsColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        pricePartUnitColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         tvParts.setItems(Inventory.getPartsInventory());
         //termékek betöltése
-        productsIDColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("productId"));
-        productsNameColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("name"));
-        inventoryProductsColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("stock"));
-        priceProductsUnitColumn.setCellValueFactory(new PropertyValueFactory<Part, Double>("price"));
+        productsIDColumn.setCellValueFactory(new PropertyValueFactory<>("productId"));
+        productsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        inventoryProductsColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        priceProductsUnitColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         tvProducts.setItems(Inventory.getProductsInventory());
         //kölcsönzések betöltése
-        loanIDColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("productId"));
-        loanNameColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("name"));
-        countLoanUnitColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("stock"));
-        timeLoanUnitColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("timeLeft"));
-        tvLoan.setItems(Inventory.getLoansInventory());
+        rentIDColumn.setCellValueFactory(new PropertyValueFactory<>("productId"));
+        rentNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        countRentUnitColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        timeRentUnitColumn.setCellValueFactory(new PropertyValueFactory<>("timeLeft"));
+        tvRent.setItems(Inventory.getRentInventory());
     }
 }
 

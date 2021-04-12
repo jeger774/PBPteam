@@ -5,7 +5,7 @@ import javafx.collections.ObservableList;
 public class Inventory {
     private static ObservableList<Part> partsInventory = FXCollections.observableArrayList();
     private static ObservableList<Product> productsInventory = FXCollections.observableArrayList();
-    private static ObservableList<Loan> loansInventory = FXCollections.observableArrayList();
+    private static ObservableList<Rent> rentInventory = FXCollections.observableArrayList();
     //termék kezelés
     public static ObservableList<Product> getProductsInventory(){
         return productsInventory;
@@ -19,7 +19,7 @@ public class Inventory {
     public static int lookupProduct(String searchItem){
         boolean isFound = false;
         int index = 0;
-        if(isInteger(searchItem) == true){
+        if(isInteger(searchItem)){
             for(int i =0; i<productsInventory.size(); i++){
                 if(Integer.parseInt(searchItem) == productsInventory.get(i).getProductId()){
                     index = i;
@@ -34,7 +34,7 @@ public class Inventory {
                 isFound = true;
             }
         }
-        if(isFound = true){
+        if(isFound){
             return index;
         }
         else {
@@ -59,7 +59,7 @@ public class Inventory {
     public static int lookupPart(String searchItem) {
         boolean isFound = false;
         int index = 0;
-        if(isInteger(searchItem) == true){
+        if(isInteger(searchItem)){
             for(int i =0; i<partsInventory.size(); i++){
                 if(Integer.parseInt(searchItem) == partsInventory.get(i).getPartId()){
                     index = i;
@@ -74,7 +74,7 @@ public class Inventory {
                 isFound = true;
             }
         }
-        if(isFound = true){
+        if(isFound){
             return index;
         }
         else {
@@ -87,32 +87,32 @@ public class Inventory {
         partsInventory.set(partNum, part);
     }
     //kölcsön kezelés
-    public static ObservableList<Loan> getLoansInventory(){ return loansInventory; }
-    public static void addLoan(Loan loan){
-        loansInventory.add(loan);
+    public static ObservableList<Rent> getRentInventory(){ return rentInventory; }
+    public static void addRent(Rent rent){
+        rentInventory.add(rent);
     }
-    public static void removeLoan(Loan loan){
-        loansInventory.remove(loan);
+    public static void removeRent(Rent rent){
+        rentInventory.remove(rent);
     }
-    public static int lookupLoan(String searchItem){
+    public static int lookupRent(String searchItem){
         boolean isFound = false;
         int index = 0;
-        if(isInteger(searchItem) == true){
-            for(int i =0; i<loansInventory.size(); i++){
-                if(Integer.parseInt(searchItem) == loansInventory.get(i).getProductId()){
+        if(isInteger(searchItem)){
+            for(int i = 0; i< rentInventory.size(); i++){
+                if(Integer.parseInt(searchItem) == rentInventory.get(i).getProductId()){
                     index = i;
                     isFound = true;
                 }
             }
         }
         else{
-            for(int i =0; i<loansInventory.size(); i++) {
-                if (searchItem.equals(loansInventory.get(i).getName()))
+            for(int i = 0; i< rentInventory.size(); i++) {
+                if (searchItem.equals(rentInventory.get(i).getName()))
                     index = i;
                 isFound = true;
             }
         }
-        if(isFound = true){
+        if(isFound){
             return index;
         }
         else {
@@ -120,8 +120,8 @@ public class Inventory {
             return -1;
         }
     }
-    //kölcsön frissítés metódus (ExtendLoanProduct)
-    public static void updateLoan(int loanNum, Loan loan){ loansInventory.set(loanNum, loan); }
+    //kölcsön frissítés metódus (ExtendRentProduct)
+    public static void updateRent(int loanNum, Rent rent){ rentInventory.set(loanNum, rent); }
     public static boolean isInteger(String inputItem){
         try{
             Integer.parseInt(inputItem);
