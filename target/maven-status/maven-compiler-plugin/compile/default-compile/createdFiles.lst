@@ -1,0 +1,12 @@
+PBPteam\model\Product.class
+PBPteam\view_controller\ModifyPartController.class
+PBPteam\view_controller\RentProductController.class
+PBPteam\Main.class
+PBPteam\view_controller\ExtendRentProductController.class
+PBPteam\view_controller\AddPartController.class
+PBPteam\view_controller\AddProductController.class
+PBPteam\model\Rent.class
+PBPteam\model\Part.class
+PBPteam\view_controller\MainController.class
+PBPteam\view_controller\ModifyProductController.class
+PBPteam\model\Inventory.class
