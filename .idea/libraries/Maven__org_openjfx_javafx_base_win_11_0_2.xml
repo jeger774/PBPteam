@@ -1,4 +1,5 @@
 <component name="libraryTable">
+<<<<<<< HEAD
   <library name="Maven: net.bytebuddy:byte-buddy:1.10.19">
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/net/bytebuddy/byte-buddy/1.10.19/byte-buddy-1.10.19.jar!/" />
@@ -8,6 +9,17 @@
     </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/net/bytebuddy/byte-buddy/1.10.19/byte-buddy-1.10.19-sources.jar!/" />
+=======
+  <library name="Maven: org.openjfx:javafx-base:win:11.0.2">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/11.0.2/javafx-base-11.0.2-win.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/11.0.2/javafx-base-11.0.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/11.0.2/javafx-base-11.0.2-sources.jar!/" />
+>>>>>>> origin/mockito
     </SOURCES>
   </library>
 </component>
