@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="mainScreenId" prefHeight="920.0" prefWidth="1319.0" style="-fx-background-color: silver;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PBPteam.view_controller.MainController">
+    <SplitPane dividerPositions="0.496551724137931" layoutX="44.0" layoutY="135.0" prefHeight="705.0" prefWidth="727.0" style="-fx-border-color: black;">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="703.0" prefWidth="386.0">
+            <Label layoutX="133.0" prefHeight="46.0" prefWidth="92.0" text="Termékek" textAlignment="CENTER">
+                <font>
+                    <Font name="System Bold" size="18.0" />
+                </font>
+            </Label>
+            <TableView fx:id="tvProducts" layoutX="14.0" layoutY="115.0" prefHeight="505.0" prefWidth="322.0" style="-fx-border-color: black;">
+                <columns>
+                    <TableColumn fx:id="productsIDColumn" prefWidth="39.0" text="ID" />
+                    <TableColumn fx:id="productsNameColumn" prefWidth="135.0" text="Termék" />
+                    <TableColumn fx:id="inventoryProductsColumn" prefWidth="65.0" text="Készlet" />
+                    <TableColumn fx:id="priceProductsUnitColumn" minWidth="8.0" prefWidth="82.0" text="Ár" />
+                </columns>
+            </TableView>
+            <Button layoutX="11.0" layoutY="630.0" mnemonicParsing="false" onAction="#handleGoToAddProducts" prefHeight="59.0" prefWidth="81.0" text="Hozzáad">
+                <font>
+                    <Font size="14.0" />
+                </font>
+                <tooltip>
+                    <Tooltip text="Új termék hozzáadása" />
+                </tooltip>
+            </Button>
+            <Button layoutX="94.0" layoutY="630.0" mnemonicParsing="false" onAction="#handleGoToModifyProducts" prefHeight="59.0" prefWidth="72.0" text="Módosít">
+                <font>
+                    <Font size="14.0" />
+                </font>
+                <tooltip>
+                    <Tooltip text="Kiválasztott termék módosítása" />
+                </tooltip>
+            </Button>
+            <Button layoutX="263.0" layoutY="630.0" mnemonicParsing="false" onAction="#handleDeleteProduct" prefHeight="59.0" prefWidth="72.0" text="Törlés">
+                <font>
+                    <Font size="14.0" />
+                </font>
+                <tooltip>
+                    <Tooltip text="Termék törlése" />
+                </tooltip>
+            </Button>
+            <Button layoutX="138.0" layoutY="81.0" mnemonicParsing="false" onAction="#handleProductSearch" prefHeight="25.0" prefWidth="83.0" text="Keresés" />
+            <TextField fx:id="productsSearchField" layoutX="75.0" layoutY="46.0" prefHeight="25.0" prefWidth="208.0">
+                <tooltip>
+                    <Tooltip text="Termék keresése" />
+                </tooltip>
+            </TextField>
+            <Button layoutX="168.0" layoutY="630.0" mnemonicParsing="false" onAction="#handleGoToRentProduct" prefHeight="59.0" prefWidth="83.0" text="Kölcsön" textAlignment="CENTER">
+                <font>
+                    <Font size="14.0" />
+                </font>
+                <tooltip>
+                    <Tooltip text="Termék hozzáadása a jelenleg kölcsönzött termékek listájához." />
+                </tooltip>
+            </Button>
+        </AnchorPane>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="703.0" prefWidth="386.0" style="fx-border-color: black;">
+            <Label layoutX="130.0" prefHeight="46.0" prefWidth="103.0" text="Alkatrészek" textAlignment="CENTER">
+                <font>
+                    <Font name="System Bold" size="18.0" />
+                </font>
+            </Label>
+            <Button layoutX="20.0" layoutY="630.0" mnemonicParsing="false" onAction="#handleGoToAddParts" prefHeight="59.0" prefWidth="81.0" text="Hozzáad">
+                <font>
+                    <Font size="14.0" />
+                </font>
+                <tooltip>
+                    <Tooltip text="Új alkatrész hozzáadása" />
+                </tooltip>
+            </Button>
+            <Button layoutX="103.0" layoutY="630.0" mnemonicParsing="false" onAction="#handleGoToModifyParts" prefHeight="59.0" prefWidth="72.0" text="Módosít">
+                <font>
+                    <Font size="14.0" />
+                </font>
+                <tooltip>
+                    <Tooltip text="Kiválasztott alkatrész módosítása" />
+                </tooltip>
+            </Button>
+            <Button layoutX="270.0" layoutY="630.0" mnemonicParsing="false" onAction="#handleDeletePart" prefHeight="59.0" prefWidth="72.0" text="Törlés">
+                <font>
+                    <Font size="14.0" />
+                </font>
+                <tooltip>
+                    <Tooltip text="Alkatrész törlése" />
+                </tooltip>
+            </Button>
+            <Button layoutX="135.0" layoutY="81.0" mnemonicParsing="false" onAction="#handlePartSearch" prefHeight="25.0" prefWidth="92.0" text="Keresés" />
+            <TextField fx:id="partsSearchField" layoutX="77.0" layoutY="46.0" prefHeight="25.0" prefWidth="208.0">
+                <tooltip>
+                    <Tooltip text="Alkatrész keresése" />
+                </tooltip>
+            </TextField>
+            <TableView fx:id="tvParts" layoutX="20.0" layoutY="113.0" prefHeight="505.0" prefWidth="322.0" style="-fx-border-color: black;">
+                <columns>
+                    <TableColumn fx:id="partsIDColumn" prefWidth="39.0" text="ID" />
+                    <TableColumn fx:id="partsNameColumn" prefWidth="135.0" text="Termék" />
+                    <TableColumn fx:id="inventoryPartsColumn" prefWidth="65.0" text="Készlet" />
+                    <TableColumn fx:id="pricePartUnitColumn" minWidth="8.0" prefWidth="82.0" text="Ár" />
+                </columns>
+            </TableView>
+        </AnchorPane>
+    </SplitPane>
+    <Label layoutX="424.0" layoutY="36.0" prefHeight="47.0" prefWidth="472.0" style="-fx-background-color: white; -fx-border-color: black;" text="PBPteam raktárkezelő rendszer" textAlignment="CENTER">
+        <font>
+            <Font name="System Bold" size="32.0" />
+        </font>
+    </Label>
+    <FlowPane layoutX="803.0" layoutY="135.0" prefHeight="541.0" prefWidth="482.0" style="-fx-border-color: black;">
+        <AnchorPane prefHeight="703.0" prefWidth="480.0" style="-fx-background-color: white;">
+            <TableView fx:id="tvRent" layoutX="27.0" layoutY="116.0" prefHeight="505.0" prefWidth="419.0" style="-fx-border-color: black;">
+                <columns>
+                    <TableColumn fx:id="rentIDColumn" prefWidth="47.0" text="ID" />
+                    <TableColumn fx:id="rentNameColumn" prefWidth="197.0" text="Termék" />
+                    <TableColumn fx:id="countRentUnitColumn" minWidth="8.0" prefWidth="74.0" text="Darabszám" />
+                    <TableColumn fx:id="timeRentUnitColumn" prefWidth="100.0" text="Hátralévő idő" />
+                </columns>
+            </TableView>
+            <Label layoutX="110.0" layoutY="14.0" text="Kölcsönzésre kiadott termékek" textAlignment="CENTER">
+                <font>
+                    <Font name="System Bold" size="18.0" />
+                </font>
+            </Label>
+            <TextField fx:id="rentSearchField" layoutX="133.0" layoutY="50.0" prefHeight="25.0" prefWidth="208.0">
+                <tooltip>
+                    <Tooltip text="Kölcsönben lévő termék keresése" />
+                </tooltip>
+            </TextField>
+            <Button layoutX="191.0" layoutY="83.0" mnemonicParsing="false" onAction="#handleRentSearch" prefHeight="25.0" prefWidth="92.0" text="Keresés" />
+            <Button layoutX="27.0" layoutY="632.0" mnemonicParsing="false" onAction="#handleGoToExtendRent" prefHeight="59.0" prefWidth="116.0" text="Meghosszabbít">
+                <font>
+                    <Font size="14.0" />
+                </font>
+                <tooltip>
+                    <Tooltip text="Kölcsönzés hátralévő idejének meghosszabbítása" />
+                </tooltip>
+            </Button>
+            <Button layoutX="371.0" layoutY="632.0" mnemonicParsing="false" onAction="#handleDeleteRent" prefHeight="59.0" prefWidth="72.0" text="Törlés">
+                <font>
+                    <Font size="14.0" />
+                </font>
+                <tooltip>
+                    <Tooltip text="Kölcsönzött termék törlése a listáról" />
+                </tooltip>
+            </Button>
+        </AnchorPane>
+    </FlowPane>
+    <Button layoutX="1139.0" layoutY="855.0" mnemonicParsing="false" onAction="#handleExitApplication" prefHeight="51.0" prefWidth="146.0" text="Kilépés">
+        <font>
+            <Font size="24.0" />
+        </font>
+        <tooltip>
+        <Tooltip text="Kilépés a programból" />
+        </tooltip>
+    </Button>
+    <Button layoutX="899.0" layoutY="855.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="234.0" text="Adatbázis mentés">
+        <font>
+          <Font size="24.0" />
+        </font>
+        <tooltip>
+          <Tooltip text="Változások mentése az adatbázisba" />
+        </tooltip>
+    </Button>
+</AnchorPane>
