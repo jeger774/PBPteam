@@ -25,8 +25,6 @@ public class AddPartController implements Initializable {
     @FXML
     private AnchorPane addPartId;
     @FXML
-    private TextField idTextField;
-    @FXML
     private TextField nameTextField;
     @FXML
     private TextField inventoryTextField;
@@ -51,7 +49,6 @@ public class AddPartController implements Initializable {
     @FXML
     public void handleSaveAddPart(ActionEvent event) throws IOException {
         Part part = new Part();
-        part.setPartId(Integer.parseInt(idTextField.getText()));
         part.setName(nameTextField.getText());
         part.setStock(Integer.parseInt(inventoryTextField.getText()));
         part.setPrice(Double.parseDouble(priceTextField.getText()));

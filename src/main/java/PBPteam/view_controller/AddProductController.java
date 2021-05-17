@@ -30,9 +30,7 @@ public class AddProductController implements Initializable {
     @FXML
     private Button cancelButton;
     @FXML
-    private TextField addPartId;
-    @FXML
-    private TextField addPartName;
+    private TextField addProductName;
     @FXML
     private TextField addInventory;
     @FXML
@@ -56,8 +54,7 @@ public class AddProductController implements Initializable {
     @FXML
     void handleSaveAddProduct(ActionEvent event) throws IOException {
         Product product = new Product();
-        product.setProductId(Integer.parseInt(addPartId.getText()));
-        product.setName(addPartName.getText());
+        product.setName(addProductName.getText());
         product.setStock(Integer.parseInt(addInventory.getText()));
         product.setPrice(Double.parseDouble(addPrice.getText()));
         Inventory.addProduct(product);

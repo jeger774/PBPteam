@@ -21,7 +21,7 @@ public class Database {
      */
     public static void createNewDatabase(String fileName) {
 
-        String url = "jdbc:sqlite:C:/sqlite/db/" + fileName;
+        String url = "jdbc:sqlite:" + fileName;
 
         try (Connection conn = DriverManager.getConnection(url)) {
             if (conn != null) {
@@ -37,7 +37,7 @@ public class Database {
 
     public static void createNewProductTable() {
         // SQLite connection string
-        String url = "jdbc:sqlite:C://sqlite/db/test.db";
+        String url = "jdbc:sqlite:pbp.db";
 
         // SQL statement for creating a new table
         String sql = "CREATE TABLE IF NOT EXISTS products (\n"
@@ -73,10 +73,10 @@ public class Database {
         }
     }
 
-    // itt vol a connection
+    // itt volt a connection
     private Connection connect() {
         // SQLite connection string
-        String url = "jdbc:sqlite:C://sqlite/db/test.db";
+        String url = "jdbc:sqlite:pbp.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
@@ -149,7 +149,7 @@ public class Database {
     //part
     public static void createNewPartTable() {
         // SQLite connection string
-        String url = "jdbc:sqlite:C://sqlite/db/test.db";
+        String url = "jdbc:sqlite:pbp.db";
 
         // SQL statement for creating a new table
         String sql = "CREATE TABLE IF NOT EXISTS parts (\n"
@@ -246,7 +246,7 @@ public class Database {
     //rent
     public static void createNewRentTable() {
         // SQLite connection string
-        String url = "jdbc:sqlite:C://sqlite/db/test.db";
+        String url = "jdbc:sqlite:pbp.db";
 
         // SQL statement for creating a new table
         String sql = "CREATE TABLE IF NOT EXISTS rents (\n"
@@ -337,11 +337,11 @@ public class Database {
             System.out.println(e.getMessage());
         }
     }
-        /**
+    /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        createNewDatabase("test.db");
+        createNewDatabase("pbp.db");
         createNewProductTable();
         createNewPartTable();
         createNewRentTable();

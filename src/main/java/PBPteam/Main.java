@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import PBPteam.Database;
 
 public class Main extends Application {
     @Override
@@ -12,9 +13,11 @@ public class Main extends Application {
         Scene scene = new Scene(root);
         primaryStage.setTitle("PBPteam");
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
     public static void main(String[] args) {
+        Database.main(args);
         launch(args);
     }
 }
