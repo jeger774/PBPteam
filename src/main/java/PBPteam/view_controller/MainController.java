@@ -145,6 +145,7 @@ public class MainController implements Initializable {
             partsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
             inventoryPartsColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
             pricePartUnitColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+            tvParts.setItems(Inventory.getPartsInventory());
         }
     }
 
@@ -223,6 +224,7 @@ public class MainController implements Initializable {
             productsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
             inventoryProductsColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
             priceProductsUnitColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+            tvProducts.setItems(Inventory.getProductsInventory());
         }
     }
 
@@ -300,6 +302,7 @@ public class MainController implements Initializable {
             rentNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
             countRentUnitColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
             timeRentUnitColumn.setCellValueFactory(new PropertyValueFactory<>("timeLeft"));
+            tvRent.setItems(Inventory.getRentInventory());
         }
     }
 
@@ -311,19 +314,19 @@ public class MainController implements Initializable {
     //megnyitáskor a mezők inicializálása
     @Override
     public void initialize (URL url, ResourceBundle rb){
-        //alkatrészek betöltése
-        partsIDColumn.setCellValueFactory(new PropertyValueFactory<>("partId"));
-        partsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        inventoryPartsColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
-        pricePartUnitColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        tvParts.setItems(Inventory.getPartsInventory());
-
         //termékek betöltése
         productsIDColumn.setCellValueFactory(new PropertyValueFactory<>("productId"));
         productsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         inventoryProductsColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         priceProductsUnitColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         tvProducts.setItems(Inventory.getProductsInventory());
+
+        //alkatrészek betöltése
+        partsIDColumn.setCellValueFactory(new PropertyValueFactory<>("partId"));
+        partsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        inventoryPartsColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        pricePartUnitColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        tvParts.setItems(Inventory.getPartsInventory());
 
         //kölcsönzések betöltése
         rentIDColumn.setCellValueFactory(new PropertyValueFactory<>("productId"));
