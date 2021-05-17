@@ -4,31 +4,24 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Inventory {
-
     //product
     public static Database database = new Database();
 
     public static void addProduct(Product product){
         database.insertProduct(product.getName(), product.getPrice(), product.getStock());
     }
-
     public static ObservableList<Product> getProductsInventory(){
         return database.selectAllProducts();
     }
-
     public static void removeProduct(Product product){
         database.deleteProduct(product.getProductId());
     }
 
-
     private static ObservableList<Part> partsInventory = FXCollections.observableArrayList();
     private static ObservableList<Product> productsInventory = FXCollections.observableArrayList();
     private static ObservableList<Rent> rentInventory = FXCollections.observableArrayList();
+
     //termék kezelés
-
-
-
-
     public static int lookupProduct(String searchItem){
         boolean isFound = false;
         int index = 0;
@@ -55,10 +48,12 @@ public class Inventory {
             return -1;
         }
     }
+
     //termék frissítés metódus (ModifyProduct)
     public static void updateProduct(int productNum, Product product){
         database.updateProduct(product.getProductId(), product.getName(), product.getPrice(), product.getStock());
     }
+
     //alkatrész kezelés
     public static ObservableList<Part> getPartsInventory(){
         return database.selectAllPart();
@@ -95,10 +90,12 @@ public class Inventory {
             return -1;
         }
     }
+
     //alkatrész frissítés metódus (ModifyPart)
     public static void updatePart(int partNum, Part part){
         database.updatePart(part.getPartId(), part.getName(), part.getPrice(), part.getStock());
     }
+
     //kölcsön kezelés
     public static ObservableList<Rent> getRentInventory(){
         return database.selectAllRents(); }
@@ -134,6 +131,7 @@ public class Inventory {
             return -1;
         }
     }
+
     //kölcsön frissítés metódus (ExtendRentProduct)
     public static void updateRent(int loanNum, Rent rent){
         database.updateRent(rent.getProductId(), rent.getTimeLeft()); }

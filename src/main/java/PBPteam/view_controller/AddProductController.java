@@ -1,5 +1,4 @@
 package PBPteam.view_controller;
-
 import PBPteam.model.Inventory;
 import PBPteam.model.Product;
 import javafx.event.ActionEvent;
@@ -16,7 +15,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -35,6 +33,7 @@ public class AddProductController implements Initializable {
     private TextField addInventory;
     @FXML
     private TextField addPrice;
+
     @FXML
     void handleCancelAddProduct(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -51,6 +50,7 @@ public class AddProductController implements Initializable {
             addPartsStage.show();
         }
     }
+
     @FXML
     void handleSaveAddProduct(ActionEvent event) throws IOException {
         Product product = new Product();
@@ -64,6 +64,7 @@ public class AddProductController implements Initializable {
         addPartsStage.setScene((addPartsScene));
         addPartsStage.show();
     }
+
     //megnyitáskor a mezők inicializálása
     @Override
     public void initialize (URL url, ResourceBundle rb){

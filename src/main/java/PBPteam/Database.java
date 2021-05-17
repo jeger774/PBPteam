@@ -1,35 +1,21 @@
 package PBPteam;
-
 import PBPteam.model.Part;
 import PBPteam.model.Product;
 import PBPteam.model.Rent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import java.sql.*;
 
-/**
- *
- * @author sqlitetutorial.net
- */
 public class Database {
-
-    /**
-     * Connect to a sample database
-     *
-     * @param fileName the database file name
-     */
     public static void createNewDatabase(String fileName) {
-
         String url = "jdbc:sqlite:" + fileName;
 
         try (Connection conn = DriverManager.getConnection(url)) {
             if (conn != null) {
                 DatabaseMetaData meta = conn.getMetaData();
-                System.out.println("The driver name is " + meta.getDriverName());
+                System.out.println("Driver:" + meta.getDriverName());
                 System.out.println("A new database has been created.");
             }
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -47,7 +33,6 @@ public class Database {
                 + "	stock int\n"
                 + ");";
 
-
         try (Connection conn = DriverManager.getConnection(url);
              Statement stmt = conn.createStatement()) {
             // create a new table
@@ -60,8 +45,7 @@ public class Database {
     public void insertProduct(String name, double price, int stock) {
         String sql = "INSERT INTO products(name,price,stock) VALUES(?,?,?)";
 
-        try
-        {
+        try {
             Connection conn = this.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, name);
@@ -73,7 +57,6 @@ public class Database {
         }
     }
 
-    // itt volt a connection
     private Connection connect() {
         // SQLite connection string
         String url = "jdbc:sqlite:pbp.db";
@@ -113,12 +96,10 @@ public class Database {
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
             // set the corresponding param
             pstmt.setInt(1, id);
             // execute the delete statement
             pstmt.executeUpdate();
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -132,7 +113,6 @@ public class Database {
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
             // set the corresponding param
             pstmt.setString(1, name);
             pstmt.setDouble(2, price);
@@ -144,7 +124,6 @@ public class Database {
             System.out.println(e.getMessage());
         }
     }
-
 
     //part
     public static void createNewPartTable() {
@@ -171,8 +150,7 @@ public class Database {
     public void insertPart(String name, double price, int stock) {
         String sql = "INSERT INTO parts(name,price,stock) VALUES(?,?,?)";
 
-        try
-        {
+        try {
             Connection conn = this.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, name);
@@ -189,12 +167,10 @@ public class Database {
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
             // set the corresponding param
             pstmt.setInt(1, id);
             // execute the delete statement
             pstmt.executeUpdate();
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -203,10 +179,10 @@ public class Database {
     public ObservableList<Part> selectAllPart(){
         String sql = "SELECT id, name, price, stock FROM parts";
         ObservableList<Part> parts = FXCollections.observableArrayList();
+
         try (Connection conn = this.connect();
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){
-
             // loop through the result set
             while (rs.next()) {
                 Part part = new Part();
@@ -230,7 +206,6 @@ public class Database {
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
             // set the corresponding param
             pstmt.setString(1, name);
             pstmt.setDouble(2, price);
@@ -268,8 +243,7 @@ public class Database {
     public void insertRent(String name, int stock, String timeleft) {
         String sql = "INSERT INTO rents(name,stock,timeleft) VALUES(?,?,?)";
 
-        try
-        {
+        try {
             Connection conn = this.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, name);
@@ -284,10 +258,10 @@ public class Database {
     public ObservableList<Rent> selectAllRents() {
         String sql = "SELECT id, name, stock, timeleft FROM rents";
         ObservableList<Rent> rents = FXCollections.observableArrayList();
+
         try (Connection conn = this.connect();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
-
             // loop through the result set
             while (rs.next()) {
                 Rent rent = new Rent();
@@ -303,23 +277,21 @@ public class Database {
         return rents;
     }
 
+    public void deleteRent(int id) {
+        String sql = "DELETE FROM rents WHERE id = ?";
 
-        public void deleteRent(int id) {
-            String sql = "DELETE FROM rents WHERE id = ?";
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            // set the corresponding param
+            pstmt.setInt(1, id);
+            // execute the delete statement
+            pstmt.executeUpdate();
 
-            try (Connection conn = this.connect();
-                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-                // set the corresponding param
-                pstmt.setInt(1, id);
-                // execute the delete statement
-                pstmt.executeUpdate();
-
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
+
+    }
 
     public void updateRent(int id, String timeleft) {
         String sql = "UPDATE rents SET timeleft = ?  "
@@ -327,7 +299,6 @@ public class Database {
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
             // set the corresponding param
             pstmt.setString(1, timeleft);
             pstmt.setInt(2, id);
@@ -337,14 +308,13 @@ public class Database {
             System.out.println(e.getMessage());
         }
     }
-    /**
-     * @param args the command line arguments
-     */
+
     public static void main(String[] args) {
         createNewDatabase("pbp.db");
         createNewProductTable();
         createNewPartTable();
         createNewRentTable();
+        @SuppressWarnings("unused")
         Database database = new Database();
     }
 }

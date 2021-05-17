@@ -6,36 +6,15 @@ public class Part {
     private final StringProperty name;
     private final DoubleProperty price;
     private final IntegerProperty stock;
+
     public Part(){
         partId  = new SimpleIntegerProperty();
         name = new SimpleStringProperty();
         price = new SimpleDoubleProperty();
         stock  = new SimpleIntegerProperty();
     }
-    public Integer getPartId() {
-        return partId.get();
-    }
-    public IntegerProperty partIdProperty() {
-        return partId;
-    }
-    public String getName() {
-        return name.get();
-    }
-    public StringProperty nameProperty() {
-        return name;
-    }
-    public double getPrice() {
-        return price.get();
-    }
-    public DoubleProperty priceProperty() {
-        return price;
-    }
-    public int getStock() {
-        return stock.get();
-    }
-    public IntegerProperty StockProperty() {
-        return stock;
-    }
+
+    //set
     public void setPartId(int partId) {
         this.partId.set(partId);
     }
@@ -48,6 +27,22 @@ public class Part {
     public void setStock(int Stock) {
         this.stock.set(Stock);
     }
+
+    //get
+    public Integer getPartId() {
+        return partId.get();
+    }
+    public String getName() {
+        return name.get();
+    }
+    public double getPrice() {
+        return price.get();
+    }
+    public int getStock() {
+        return stock.get();
+    }
+
+    //hibaellenőrzés, egyelőre nincs használva
     public static String isValidPart(String name, int inv, double price, String error){
         if(name == null){
             error = error +"A név megadása kötelező.";

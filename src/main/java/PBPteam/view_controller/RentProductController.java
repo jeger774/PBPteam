@@ -1,5 +1,4 @@
 package PBPteam.view_controller;
-
 import PBPteam.model.Inventory;
 import PBPteam.model.Product;
 import PBPteam.model.Rent;
@@ -17,7 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -38,6 +36,7 @@ public class RentProductController implements Initializable {
     private TextField inventoryTextField;
     @FXML
     private TextField timeTextField;
+
     @FXML
     void handleCancelRentProduct(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -54,6 +53,7 @@ public class RentProductController implements Initializable {
             rentProductStage.show();
         }
     }
+
     @FXML
     void handleSaveRentProduct(ActionEvent event) throws IOException {
         Rent rent = new Rent();
@@ -68,6 +68,7 @@ public class RentProductController implements Initializable {
         rentProductStage.setScene((rentProductScene));
         rentProductStage.show();
     }
+
     //megnyitáskor a mezők inicializálása
     @Override
     public void initialize (URL url, ResourceBundle rb){

@@ -8,10 +8,12 @@ public class Rent extends Product {
         super();
         timeLeft = new SimpleStringProperty();
     }
+
     //set
     public void setTimeLeft(String timeLeft){
         this.timeLeft.set(timeLeft);
     }
+
     //get
     public String getTimeLeft(){
         return this.timeLeft.get();

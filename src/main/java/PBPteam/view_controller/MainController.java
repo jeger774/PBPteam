@@ -1,5 +1,4 @@
 package PBPteam.view_controller;
-
 import PBPteam.model.Inventory;
 import PBPteam.model.Part;
 import PBPteam.model.Product;
@@ -19,7 +18,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -70,11 +68,12 @@ public class MainController implements Initializable {
     private TableColumn<Part, Integer> countRentUnitColumn;
     @FXML
     private TableColumn<Part, String> timeRentUnitColumn;
-    //
+
     private static int modifyPartIndex;
     private static int modifyProductIndex;
     private static int extendRentIndex;
     private static int rentProductIndex;
+
     public static int getModifyPartIndex(){
         return modifyPartIndex;
     }
@@ -85,11 +84,12 @@ public class MainController implements Initializable {
         return extendRentIndex;
     }
     public static int getRentProductIndex(){ return rentProductIndex; }
+
     private static Part modifiedPart;
     private static Product modifiedProduct;
     private static Rent extendedRent;
     private static Product rentedProduct;
-    //
+
     @FXML
     private void handlePartSearch(ActionEvent event){
         String searchedPart = partsSearchField.getText();
@@ -112,6 +112,7 @@ public class MainController implements Initializable {
             tvParts.setItems(tempObservableList);
         }
     }
+
     @FXML
     public void handleGoToModifyParts(ActionEvent event)throws IOException{
         Part tempPart = tvParts.getSelectionModel().getSelectedItem();
@@ -129,6 +130,7 @@ public class MainController implements Initializable {
         addPartsStage.setScene((addPartsScene));
         addPartsStage.show();
     }
+
     @FXML
     private void handleDeletePart(ActionEvent event){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -145,6 +147,7 @@ public class MainController implements Initializable {
             pricePartUnitColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         }
     }
+
     @FXML
     private void handleGoToAddParts(ActionEvent event) throws IOException{
         Parent addPartsScreen = FXMLLoader.load(getClass().getResource("AddPart.fxml"));
@@ -153,6 +156,7 @@ public class MainController implements Initializable {
         addPartsStage.setScene((addPartsScene));
         addPartsStage.show();
     }
+
     @FXML
     private void handleProductSearch(ActionEvent event){
         String searchedProduct = productsSearchField.getText();
@@ -176,6 +180,7 @@ public class MainController implements Initializable {
         }
 
     }
+
     @FXML
     private void handleGoToModifyProducts(ActionEvent event)throws IOException{
         Product tempProduct = tvProducts.getSelectionModel().getSelectedItem();
@@ -194,6 +199,7 @@ public class MainController implements Initializable {
         addPartsStage.show();
         modifiedPart = tvParts.getSelectionModel().getSelectedItem();
     }
+
     @FXML
     private void handleGoToAddProducts (ActionEvent event)throws IOException{
         Parent addPartsScreen = FXMLLoader.load(getClass().getResource("AddProduct.fxml"));
@@ -202,6 +208,7 @@ public class MainController implements Initializable {
         addPartsStage.setScene((addPartsScene));
         addPartsStage.show();
     }
+
     @FXML
     private void handleDeleteProduct(ActionEvent event){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -218,6 +225,7 @@ public class MainController implements Initializable {
             priceProductsUnitColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         }
     }
+
     @FXML
     public void handleGoToRentProduct(ActionEvent event)throws IOException{
         Product tempProduct = tvProducts.getSelectionModel().getSelectedItem();
@@ -235,6 +243,7 @@ public class MainController implements Initializable {
         rentProductStage.setScene((rentProductScene));
         rentProductStage.show();
     }
+
     @FXML
     private void handleGoToExtendRent(ActionEvent event)throws IOException{
         Rent tempRent = tvRent.getSelectionModel().getSelectedItem();
@@ -253,6 +262,7 @@ public class MainController implements Initializable {
         extendRentProductStage.show();
         extendedRent = tvRent.getSelectionModel().getSelectedItem();
     }
+
     @FXML
     private void handleRentSearch(ActionEvent event){
         String searchedRent = rentSearchField.getText();
@@ -275,6 +285,7 @@ public class MainController implements Initializable {
             tvRent.setItems(tempObservableList);
         }
     }
+
     @FXML
     private void handleDeleteRent(ActionEvent event){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -291,12 +302,12 @@ public class MainController implements Initializable {
             timeRentUnitColumn.setCellValueFactory(new PropertyValueFactory<>("timeLeft"));
         }
     }
+
     @FXML
     private void handleExitApplication(ActionEvent event){
         Platform.exit();
     }
-    /*egyelőre nincs implementálva adatbázis így üres metódus
-    private void handleSaveToDatabase(ActionEvent event) {;}*/
+
     //megnyitáskor a mezők inicializálása
     @Override
     public void initialize (URL url, ResourceBundle rb){
@@ -306,12 +317,14 @@ public class MainController implements Initializable {
         inventoryPartsColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         pricePartUnitColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         tvParts.setItems(Inventory.getPartsInventory());
+
         //termékek betöltése
         productsIDColumn.setCellValueFactory(new PropertyValueFactory<>("productId"));
         productsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         inventoryProductsColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         priceProductsUnitColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         tvProducts.setItems(Inventory.getProductsInventory());
+
         //kölcsönzések betöltése
         rentIDColumn.setCellValueFactory(new PropertyValueFactory<>("productId"));
         rentNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
