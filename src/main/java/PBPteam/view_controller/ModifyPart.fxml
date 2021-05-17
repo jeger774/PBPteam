@@ -13,7 +13,7 @@
                 <Font name="System Bold" size="24.0" />
             </font>
         </Label>
-        <Label layoutX="46.0" layoutY="97.0" prefHeight="27.0" prefWidth="64.0" text="ID">
+        <Label layoutX="46.0" layoutY="97.0" opacity="0.45" prefHeight="27.0" prefWidth="64.0" text="ID">
             <font>
                 <Font size="24.0" />
             </font>
@@ -43,7 +43,7 @@
                 <Font size="18.0" />
             </font>
         </Button>
-        <TextField fx:id="idTextField" layoutX="264.0" layoutY="102.0" />
+        <TextField fx:id="idTextField" editable="false" layoutX="264.0" layoutY="102.0" opacity="0.45" />
         <TextField fx:id="nameTextField" layoutX="264.0" layoutY="161.0" />
         <TextField fx:id="inventoryTextField" layoutX="264.0" layoutY="222.0">
             <font>

@@ -1,0 +1,4 @@
+#AnchorPane{
+    -fx-background-image: url("bg.jpg") no-repeat center center fixed;
+	-fx-background-size: cover;
+}

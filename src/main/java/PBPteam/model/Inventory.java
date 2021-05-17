@@ -1,21 +1,34 @@
 package PBPteam.model;
+import PBPteam.Database;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Inventory {
+
+    //product
+    public static Database database = new Database();
+
+    public static void addProduct(Product product){
+        database.insertProduct(product.getName(), product.getPrice(), product.getStock());
+    }
+
+    public static ObservableList<Product> getProductsInventory(){
+        return database.selectAllProducts();
+    }
+
+    public static void removeProduct(Product product){
+        database.deleteProduct(product.getProductId());
+    }
+
+
     private static ObservableList<Part> partsInventory = FXCollections.observableArrayList();
     private static ObservableList<Product> productsInventory = FXCollections.observableArrayList();
     private static ObservableList<Rent> rentInventory = FXCollections.observableArrayList();
     //termék kezelés
-    public static ObservableList<Product> getProductsInventory(){
-        return productsInventory;
-    }
-    public static void addProduct(Product product){
-        productsInventory.add(product);
-    }
-    public static void removeProduct(Product product){
-        productsInventory.remove(product);
-    }
+
+
+
+
     public static int lookupProduct(String searchItem){
         boolean isFound = false;
         int index = 0;
@@ -44,17 +57,17 @@ public class Inventory {
     }
     //termék frissítés metódus (ModifyProduct)
     public static void updateProduct(int productNum, Product product){
-        productsInventory.set(productNum, product);
+        database.updateProduct(product.getProductId(), product.getName(), product.getPrice(), product.getStock());
     }
     //alkatrész kezelés
     public static ObservableList<Part> getPartsInventory(){
-        return partsInventory;
+        return database.selectAllPart();
     }
     public static void addParts(Part part){
-        partsInventory.add(part);
+        database.insertPart(part.getName(), part.getPrice(), part.getStock());
     }
     public static void removePart(Part part){
-        partsInventory.remove(part);
+        database.deletePart(part.getPartId());
     }
     public static int lookupPart(String searchItem) {
         boolean isFound = false;
@@ -84,15 +97,16 @@ public class Inventory {
     }
     //alkatrész frissítés metódus (ModifyPart)
     public static void updatePart(int partNum, Part part){
-        partsInventory.set(partNum, part);
+        database.updatePart(part.getPartId(), part.getName(), part.getPrice(), part.getStock());
     }
     //kölcsön kezelés
-    public static ObservableList<Rent> getRentInventory(){ return rentInventory; }
+    public static ObservableList<Rent> getRentInventory(){
+        return database.selectAllRents(); }
     public static void addRent(Rent rent){
-        rentInventory.add(rent);
+        database.insertRent(rent.getName(), rent.getStock(), rent.getTimeLeft());
     }
     public static void removeRent(Rent rent){
-        rentInventory.remove(rent);
+        database.deleteRent(rent.getProductId());
     }
     public static int lookupRent(String searchItem){
         boolean isFound = false;
@@ -121,7 +135,8 @@ public class Inventory {
         }
     }
     //kölcsön frissítés metódus (ExtendRentProduct)
-    public static void updateRent(int loanNum, Rent rent){ rentInventory.set(loanNum, rent); }
+    public static void updateRent(int loanNum, Rent rent){
+        database.updateRent(rent.getProductId(), rent.getTimeLeft()); }
     public static boolean isInteger(String inputItem){
         try{
             Integer.parseInt(inputItem);

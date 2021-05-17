@@ -1,4 +1,5 @@
 package PBPteam.view_controller;
+
 import PBPteam.model.Inventory;
 import PBPteam.model.Part;
 import PBPteam.model.Product;
@@ -18,6 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -113,7 +115,14 @@ public class MainController implements Initializable {
     @FXML
     public void handleGoToModifyParts(ActionEvent event)throws IOException{
         Part tempPart = tvParts.getSelectionModel().getSelectedItem();
-        modifyPartIndex = Inventory.getPartsInventory().indexOf(tempPart);
+       //modifyPartIndex = Inventory.getPartsInventory().indexOf(tempPart);
+        ObservableList<Part> parts = Inventory.getPartsInventory();
+        modifyPartIndex = 0;
+        for (modifyPartIndex = 0; modifyPartIndex < parts.size(); ++modifyProductIndex ){
+            if (parts.get(modifyProductIndex).getPartId() == tempPart.getPartId()){
+                break;
+            }
+        }
         Parent addPartsScreen = FXMLLoader.load(getClass().getResource("ModifyPart.fxml"));
         Scene addPartsScene = new Scene(addPartsScreen);
         Stage addPartsStage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -170,7 +179,14 @@ public class MainController implements Initializable {
     @FXML
     private void handleGoToModifyProducts(ActionEvent event)throws IOException{
         Product tempProduct = tvProducts.getSelectionModel().getSelectedItem();
-        modifyProductIndex = Inventory.getProductsInventory().indexOf(tempProduct);
+        //modifyProductIndex = Inventory.getProductsInventory().indexOf(tempProduct);
+        ObservableList<Product> products = Inventory.getProductsInventory();
+        modifyProductIndex = 0;
+        for (modifyProductIndex = 0; modifyProductIndex < products.size(); ++modifyProductIndex ){
+            if (products.get(modifyProductIndex).getProductId() == tempProduct.getProductId()){
+                break;
+            }
+        }
         Parent addPartsScreen = FXMLLoader.load(getClass().getResource("ModifyProduct.fxml"));
         Scene addPartsScene = new Scene(addPartsScreen);
         Stage addPartsStage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -205,7 +221,14 @@ public class MainController implements Initializable {
     @FXML
     public void handleGoToRentProduct(ActionEvent event)throws IOException{
         Product tempProduct = tvProducts.getSelectionModel().getSelectedItem();
-        rentProductIndex = Inventory.getProductsInventory().indexOf(tempProduct);
+        System.out.println(tempProduct);
+        ObservableList<Product> products = Inventory.getProductsInventory();
+        rentProductIndex = 0;
+        for (rentProductIndex = 0; rentProductIndex < products.size(); ++rentProductIndex ){
+            if (products.get(rentProductIndex).getProductId() == tempProduct.getProductId()){
+                break;
+            }
+        }
         Parent rentProductScreen = FXMLLoader.load(getClass().getResource("RentProduct.fxml"));
         Scene rentProductScene = new Scene(rentProductScreen);
         Stage rentProductStage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -215,7 +238,14 @@ public class MainController implements Initializable {
     @FXML
     private void handleGoToExtendRent(ActionEvent event)throws IOException{
         Rent tempRent = tvRent.getSelectionModel().getSelectedItem();
-        extendRentIndex = Inventory.getRentInventory().indexOf(tempRent);
+        //extendRentIndex = Inventory.getRentInventory().indexOf(tempRent);
+        ObservableList<Rent> rents = Inventory.getRentInventory();
+        extendRentIndex = 0;
+        for (extendRentIndex = 0; extendRentIndex < rents.size(); ++extendRentIndex ){
+            if (rents.get(extendRentIndex).getProductId() == tempRent.getProductId()){
+                break;
+            }
+        }
         Parent extendRentProductScreen = FXMLLoader.load(getClass().getResource("ExtendRentProduct.fxml"));
         Scene extendRentProductScene = new Scene(extendRentProductScreen);
         Stage extendRentProductStage = (Stage)((Node)event.getSource()).getScene().getWindow();

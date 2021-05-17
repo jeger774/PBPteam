@@ -1,4 +1,5 @@
 package PBPteam.view_controller;
+
 import PBPteam.model.Inventory;
 import PBPteam.model.Part;
 import javafx.event.ActionEvent;
@@ -15,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;

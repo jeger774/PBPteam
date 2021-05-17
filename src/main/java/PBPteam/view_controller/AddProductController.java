@@ -1,4 +1,5 @@
 package PBPteam.view_controller;
+
 import PBPteam.model.Inventory;
 import PBPteam.model.Product;
 import javafx.event.ActionEvent;
@@ -15,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -28,9 +30,7 @@ public class AddProductController implements Initializable {
     @FXML
     private Button cancelButton;
     @FXML
-    private TextField addPartId;
-    @FXML
-    private TextField addPartName;
+    private TextField addProductName;
     @FXML
     private TextField addInventory;
     @FXML
@@ -54,8 +54,7 @@ public class AddProductController implements Initializable {
     @FXML
     void handleSaveAddProduct(ActionEvent event) throws IOException {
         Product product = new Product();
-        product.setProductId(Integer.parseInt(addPartId.getText()));
-        product.setName(addPartName.getText());
+        product.setName(addProductName.getText());
         product.setStock(Integer.parseInt(addInventory.getText()));
         product.setPrice(Double.parseDouble(addPrice.getText()));
         Inventory.addProduct(product);

@@ -1,7 +1,8 @@
 package PBPteam.view_controller;
+
 import PBPteam.model.Inventory;
-import PBPteam.model.Rent;
 import PBPteam.model.Product;
+import PBPteam.model.Rent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -69,6 +71,8 @@ public class RentProductController implements Initializable {
     //megnyitáskor a mezők inicializálása
     @Override
     public void initialize (URL url, ResourceBundle rb){
+        System.out.println(Inventory.getProductsInventory());
+        System.out.println(MainController.getRentProductIndex());
         Product productToBeRented = Inventory.getProductsInventory().get(MainController.getRentProductIndex());
         idTextField.setText(String.valueOf(productToBeRented.getProductId()));
         productTextField.setText(productToBeRented.getName());

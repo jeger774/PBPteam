@@ -2,6 +2,7 @@ package PBPteam.model;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 public class Product {
     private static ObservableList<Part> parts = FXCollections.observableArrayList();
     private final IntegerProperty productId;

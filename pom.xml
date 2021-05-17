@@ -50,6 +50,8 @@
                 <directory>src/main/java</directory>
                 <includes>
                     <include>**/*.fxml</include>
+                    <include>**/*.css</include>
+                    <include>**/*.jpg</include>
                 </includes>
             </resource>
         </resources>
@@ -79,6 +81,12 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.34.0</version>
+        </dependency>
     </dependencies>
     <properties>
         <maven.compiler.source>15</maven.compiler.source>

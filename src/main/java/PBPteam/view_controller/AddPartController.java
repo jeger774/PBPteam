@@ -1,4 +1,5 @@
 package PBPteam.view_controller;
+
 import PBPteam.model.Inventory;
 import PBPteam.model.Part;
 import javafx.event.ActionEvent;
@@ -14,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -22,8 +24,6 @@ import java.util.ResourceBundle;
 public class AddPartController implements Initializable {
     @FXML
     private AnchorPane addPartId;
-    @FXML
-    private TextField idTextField;
     @FXML
     private TextField nameTextField;
     @FXML
@@ -49,7 +49,6 @@ public class AddPartController implements Initializable {
     @FXML
     public void handleSaveAddPart(ActionEvent event) throws IOException {
         Part part = new Part();
-        part.setPartId(Integer.parseInt(idTextField.getText()));
         part.setName(nameTextField.getText());
         part.setStock(Integer.parseInt(inventoryTextField.getText()));
         part.setPrice(Double.parseDouble(priceTextField.getText()));
