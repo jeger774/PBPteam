@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="rentProductID" prefHeight="344.0" prefWidth="441.0" style="-fx-border-color: black; -fx-border-width: 2;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PBPteam.view_controller.RentProductController">
+<AnchorPane id="AnchorPane" fx:id="rentProductID" prefHeight="344.0" prefWidth="441.0" style="-fx-border-color: black; -fx-border-width: 2;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="PBPteam.view_controller.RentProductController">
     <Label layoutX="18.0" layoutY="14.0" prefHeight="44.0" prefWidth="277.0" text="Termék kölcsönbeadása">
         <font>
             <Font name="System Bold" size="24.0" />

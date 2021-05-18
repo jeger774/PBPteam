@@ -9,8 +9,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -19,6 +21,12 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ModifyProductController implements Initializable {
+    @FXML
+    public AnchorPane modifyProductId;
+    @FXML
+    public Button saveButton;
+    @FXML
+    public Button cancelButton;
     @FXML
     private TextField idTextField;
     @FXML

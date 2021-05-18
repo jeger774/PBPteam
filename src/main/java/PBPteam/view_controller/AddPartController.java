@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -19,6 +20,8 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AddPartController implements Initializable {
+    @FXML
+    public AnchorPane addPartId;
     @FXML
     private TextField nameTextField;
     @FXML

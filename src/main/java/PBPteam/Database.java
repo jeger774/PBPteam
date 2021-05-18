@@ -14,7 +14,7 @@ public class Database {
             if (conn != null) {
                 DatabaseMetaData meta = conn.getMetaData();
                 System.out.println("Driver:" + meta.getDriverName());
-                System.out.println("A new database has been created.");
+                System.out.println("A database has been created.");
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -401,13 +401,13 @@ public class Database {
         return rents;
     }
 
-    public void deleteRent(int id) {
-        String sql = "DELETE FROM rents WHERE id = ?";
+    public void deleteRent(String name) {
+        String sql = "DELETE FROM rents WHERE name = ?";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             // set the corresponding param
-            pstmt.setInt(1, id);
+            pstmt.setString(1, name);
             // execute the delete statement
             pstmt.executeUpdate();
         } catch (SQLException e) {

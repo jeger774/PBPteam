@@ -12,7 +12,7 @@ public class Inventory {
     public static void addProduct(Product product){ database.insertProduct(product.getName(), product.getPrice(), product.getStock()); }
     public static void removeProduct(Product product) {
         database.deleteProduct(product.getProductId());
-        database.deleteRent(product.getProductId());
+        database.deleteRent(product.getName());
     }
     public static ObservableList<Product> lookupProduct(String searchItem){
         return database.selectAllProductsByName(searchItem);
@@ -53,7 +53,7 @@ public class Inventory {
         database.updateProductWhenRented(rent.getName(), product.getStock() - stockrent );
     }
     public static void removeRent(Rent rent){
-        database.deleteRent(rent.getProductId());
+        database.deleteRent(rent.getName());
     }
     public static ObservableList<Rent> lookupRent(String searchItem){
         return database.selectAllRentsByName(searchItem);

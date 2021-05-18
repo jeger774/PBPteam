@@ -6,44 +6,46 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="addPartId" prefHeight="359.0" prefWidth="461.0" style="-fx-border-color: black; -fx-border-width: 2;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PBPteam.view_controller.AddPartController">
-    <children>
-        <Label layoutX="14.0" layoutY="14.0" prefHeight="44.0" prefWidth="245.0" text="Alkatrész hozzáadása">
-            <font>
-                <Font name="System Bold" size="24.0" />
-            </font>
-        </Label>
-        <Label layoutX="47.0" layoutY="100.0" prefHeight="35.0" prefWidth="161.0" text="Alkatrész neve">
-            <font>
-                <Font size="24.0" />
-            </font>
-        </Label>
-        <Label layoutX="47.0" layoutY="161.0" prefHeight="35.0" prefWidth="121.0" text="Készlet">
-            <font>
-                <Font size="24.0" />
-            </font>
-        </Label>
-        <Label layoutX="47.0" layoutY="224.0" prefHeight="35.0" prefWidth="30.0" text="Ár">
-            <font>
-                <Font size="24.0" />
-            </font>
-        </Label>
-        <Button layoutX="13.0" layoutY="307.0" mnemonicParsing="false" onAction="#handleSaveAddPart" prefHeight="44.0" prefWidth="105.0" text="Mentés">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Button>
-        <Button layoutX="337.0" layoutY="307.0" mnemonicParsing="false" onAction="#handleCancelAddPart" prefHeight="44.0" prefWidth="111.0" text="Mégse">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Button>
-        <TextField fx:id="nameTextField" layoutX="265.0" layoutY="105.0" />
-        <TextField fx:id="inventoryTextField" layoutX="265.0" layoutY="166.0">
-            <font>
-                <Font name="System Italic" size="12.0" />
-            </font>
-        </TextField>
-        <TextField fx:id="priceTextField" layoutX="265.0" layoutY="229.0" />
-    </children>
+<AnchorPane id="AnchorPane" fx:id="addPartId" prefHeight="359.0" prefWidth="461.0"
+            style="-fx-border-color: black; -fx-border-width: 2;" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml" fx:controller="PBPteam.view_controller.AddPartController">
+    <Label layoutX="14.0" layoutY="14.0" prefHeight="44.0" prefWidth="245.0" text="Alkatrész hozzáadása">
+        <font>
+            <Font name="System Bold" size="24.0"/>
+        </font>
+    </Label>
+    <Label layoutX="47.0" layoutY="100.0" prefHeight="35.0" prefWidth="161.0" text="Alkatrész neve">
+        <font>
+            <Font size="24.0"/>
+        </font>
+    </Label>
+    <Label layoutX="47.0" layoutY="161.0" prefHeight="35.0" prefWidth="121.0" text="Készlet">
+        <font>
+            <Font size="24.0"/>
+        </font>
+    </Label>
+    <Label layoutX="47.0" layoutY="224.0" prefHeight="35.0" prefWidth="30.0" text="Ár">
+        <font>
+            <Font size="24.0"/>
+        </font>
+    </Label>
+    <Button layoutX="13.0" layoutY="307.0" mnemonicParsing="false" onAction="#handleSaveAddPart" prefHeight="44.0"
+            prefWidth="105.0" text="Mentés">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Button>
+    <Button layoutX="337.0" layoutY="307.0" mnemonicParsing="false" onAction="#handleCancelAddPart" prefHeight="44.0"
+            prefWidth="111.0" text="Mégse">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Button>
+    <TextField fx:id="nameTextField" layoutX="265.0" layoutY="105.0"/>
+    <TextField fx:id="inventoryTextField" layoutX="265.0" layoutY="166.0">
+        <font>
+            <Font name="System Italic" size="12.0"/>
+        </font>
+    </TextField>
+    <TextField fx:id="priceTextField" layoutX="265.0" layoutY="229.0"/>
 </AnchorPane>
