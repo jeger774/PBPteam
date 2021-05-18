@@ -4,7 +4,6 @@ import PBPteam.model.Part;
 import PBPteam.model.Product;
 import PBPteam.model.Rent;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +14,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -25,17 +23,9 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
     @FXML
-    private AnchorPane mainScreenId;
-    @FXML
-    private Button partSearchButton;
-    @FXML
     private TextField partsSearchField;
     @FXML
-    private Button productSearchButton;
-    @FXML
     private TextField productsSearchField;
-    @FXML
-    private Button rentSearchButton;
     @FXML
     private TextField rentSearchField;
     @FXML
@@ -85,6 +75,8 @@ public class MainController implements Initializable {
     }
     public static int getRentProductIndex(){ return rentProductIndex; }
 
+    //alkatrészek
+    @SuppressWarnings("unused")
     @FXML
     private void handlePartSearch(ActionEvent event){
         String searchedPart = partsSearchField.getText();
@@ -109,6 +101,7 @@ public class MainController implements Initializable {
         modifyPartsStage.show();
     }
 
+    @SuppressWarnings({"unused","Duplicates"})
     @FXML
     private void handleDeletePart(ActionEvent event){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -117,7 +110,7 @@ public class MainController implements Initializable {
         alert.setHeaderText("Megerősítés");
         alert.setContentText("Biztosan törölni szeretné?");
         Optional<ButtonType> outcome = alert.showAndWait();
-        if(outcome.get() == ButtonType.OK) {
+        if(outcome.orElse(null) == ButtonType.OK) {
             Inventory.removePart(tvParts.getSelectionModel().getSelectedItem());
             partsIDColumn.setCellValueFactory(new PropertyValueFactory<>("partId"));
             partsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -136,6 +129,8 @@ public class MainController implements Initializable {
         addPartsStage.show();
     }
 
+    //termékek
+    @SuppressWarnings("unused")
     @FXML
     private void handleProductSearch(ActionEvent event){
         String searchedProduct = productsSearchField.getText();
@@ -169,6 +164,7 @@ public class MainController implements Initializable {
         addPartsStage.show();
     }
 
+    @SuppressWarnings({"unused","Duplicates"})
     @FXML
     private void handleDeleteProduct(ActionEvent event){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -177,7 +173,7 @@ public class MainController implements Initializable {
         alert.setHeaderText("Megerősítés");
         alert.setContentText("Biztosan törölni szeretné?");
         Optional<ButtonType> outcome = alert.showAndWait();
-        if(outcome.get() == ButtonType.OK) {
+        if(outcome.orElse(null) == ButtonType.OK) {
             Inventory.removeProduct(tvProducts.getSelectionModel().getSelectedItem());
             productsIDColumn.setCellValueFactory(new PropertyValueFactory<>("productId"));
             productsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -188,6 +184,7 @@ public class MainController implements Initializable {
         }
     }
 
+    //kölcsönzések
     @FXML
     public void handleGoToRentProduct(ActionEvent event)throws IOException{
         Product tempProduct = tvProducts.getSelectionModel().getSelectedItem();
@@ -209,7 +206,6 @@ public class MainController implements Initializable {
     @FXML
     private void handleGoToExtendRent(ActionEvent event)throws IOException{
         Rent tempRent = tvRent.getSelectionModel().getSelectedItem();
-        //extendRentIndex = Inventory.getRentInventory().indexOf(tempRent);
         ObservableList<Rent> rents = Inventory.getRentInventory();
         extendRentIndex = 0;
         for (extendRentIndex = 0; extendRentIndex < rents.size(); ++extendRentIndex ){
@@ -224,6 +220,7 @@ public class MainController implements Initializable {
         extendRentProductStage.show();
     }
 
+    @SuppressWarnings("unused")
     @FXML
     private void handleRentSearch(ActionEvent event){
         String searchedRent = rentSearchField.getText();
@@ -231,6 +228,7 @@ public class MainController implements Initializable {
         else tvRent.setItems(Inventory.lookupRent(searchedRent));
     }
 
+    @SuppressWarnings({"unused","Duplicates"})
     @FXML
     private void handleDeleteRent(ActionEvent event){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -239,7 +237,7 @@ public class MainController implements Initializable {
         alert.setHeaderText("Megerősítés");
         alert.setContentText("Biztosan törölni szeretné?");
         Optional<ButtonType> outcome = alert.showAndWait();
-        if(outcome.get() == ButtonType.OK) {
+        if(outcome.orElse(null) == ButtonType.OK) {
             Inventory.removeRent(tvRent.getSelectionModel().getSelectedItem());
             rentIDColumn.setCellValueFactory(new PropertyValueFactory<>("productId"));
             rentNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -249,12 +247,15 @@ public class MainController implements Initializable {
         }
     }
 
+    //kilépés
+    @SuppressWarnings("unused")
     @FXML
     private void handleExitApplication(ActionEvent event){
         Platform.exit();
     }
 
     //megnyitáskor a mezők inicializálása
+    @SuppressWarnings("Duplicates")
     @Override
     public void initialize (URL url, ResourceBundle rb){
         //termékek betöltése

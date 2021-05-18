@@ -9,10 +9,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -22,18 +20,14 @@ import java.util.ResourceBundle;
 
 public class AddProductController implements Initializable {
     @FXML
-    private AnchorPane addProductId;
-    @FXML
-    private Button saveButton;
-    @FXML
-    private Button cancelButton;
-    @FXML
     private TextField addProductName;
     @FXML
     private TextField addInventory;
     @FXML
     private TextField addPrice;
 
+    //visszavonás
+    @SuppressWarnings("Duplicates")
     @FXML
     void handleCancelAddProduct(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -42,15 +36,16 @@ public class AddProductController implements Initializable {
         alert.setHeaderText("Megerősítés");
         alert.setContentText("Biztosan visszavonja a hozzáadást?");
         Optional<ButtonType> outcome = alert.showAndWait();
-        if(outcome.get() == ButtonType.OK) {
-            Parent addPartsScreen = FXMLLoader.load(getClass().getResource("Main.fxml"));
-            Scene addPartsScene = new Scene(addPartsScreen);
-            Stage addPartsStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            addPartsStage.setScene((addPartsScene));
-            addPartsStage.show();
+        if(outcome.orElse(null) == ButtonType.OK) {
+            Parent addProductsScreen = FXMLLoader.load(getClass().getResource("Main.fxml"));
+            Scene addProductsScene = new Scene(addProductsScreen);
+            Stage addProductsStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            addProductsStage.setScene((addProductsScene));
+            addProductsStage.show();
         }
     }
 
+    //mentés
     @FXML
     void handleSaveAddProduct(ActionEvent event) throws IOException {
         Product product = new Product();
@@ -58,16 +53,14 @@ public class AddProductController implements Initializable {
         product.setStock(Integer.parseInt(addInventory.getText()));
         product.setPrice(Double.parseDouble(addPrice.getText()));
         Inventory.addProduct(product);
-        Parent addPartsScreen = FXMLLoader.load(getClass().getResource("Main.fxml"));
-        Scene addPartsScene = new Scene(addPartsScreen);
-        Stage addPartsStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        addPartsStage.setScene((addPartsScene));
-        addPartsStage.show();
+        Parent addProductsScreen = FXMLLoader.load(getClass().getResource("Main.fxml"));
+        Scene addProductsScene = new Scene(addProductsScreen);
+        Stage addProductsStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        addProductsStage.setScene((addProductsScene));
+        addProductsStage.show();
     }
 
     //megnyitáskor a mezők inicializálása
     @Override
-    public void initialize (URL url, ResourceBundle rb){
-        ;
-    }
+    public void initialize (URL url, ResourceBundle rb){}
 }

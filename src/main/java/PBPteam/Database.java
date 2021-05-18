@@ -26,6 +26,7 @@ public class Database {
         String url = "jdbc:sqlite:pbp.db";
 
         // SQL statement for creating a new table
+        @SuppressWarnings("all")
         String sql = "CREATE TABLE IF NOT EXISTS products (\n"
                 + "	id integer PRIMARY KEY,\n"
                 + "	name text NOT NULL,\n"
@@ -42,6 +43,7 @@ public class Database {
         }
     }
 
+    @SuppressWarnings("Duplicates")
     public void insertProduct(String name, double price, int stock) {
         String sql = "INSERT INTO products(name,price,stock) VALUES(?,?,?)";
 
@@ -69,6 +71,7 @@ public class Database {
         return conn;
     }
 
+    @SuppressWarnings("Duplicates")
     public ObservableList<Product> selectAllProducts(){
         String sql = "SELECT id, name, price, stock FROM products";
         ObservableList<Product> products = FXCollections.observableArrayList();
@@ -91,12 +94,13 @@ public class Database {
         return products;
     }
 
+    @SuppressWarnings("Duplicates")
     public ObservableList<Product> selectAllProductsByName(String name){
         String sql = "SELECT id, name, price, stock FROM products WHERE name = ?";
         ObservableList<Product> products = FXCollections.observableArrayList();
 
         try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql); )
+             PreparedStatement pstmt = conn.prepareStatement(sql))
 
              {
             // loop through the result set
@@ -152,6 +156,7 @@ public class Database {
         }
     }
 
+    @SuppressWarnings("Duplicates")
     public void updateProduct(int id, String name, double price, int stock) {
         String sql = "UPDATE products SET name = ? , "
                 + "price = ? ,"
@@ -194,6 +199,7 @@ public class Database {
         String url = "jdbc:sqlite:pbp.db";
 
         // SQL statement for creating a new table
+        @SuppressWarnings("all")
         String sql = "CREATE TABLE IF NOT EXISTS parts (\n"
                 + "	id integer PRIMARY KEY,\n"
                 + "	name text NOT NULL,\n"
@@ -210,6 +216,7 @@ public class Database {
         }
     }
 
+    @SuppressWarnings("Duplicates")
     public void insertPart(String name, double price, int stock) {
         String sql = "INSERT INTO parts(name,price,stock) VALUES(?,?,?)";
 
@@ -239,6 +246,7 @@ public class Database {
         }
     }
 
+    @SuppressWarnings("Duplicates")
     public ObservableList<Part> selectAllPart(){
         String sql = "SELECT id, name, price, stock FROM parts";
         ObservableList<Part> parts = FXCollections.observableArrayList();
@@ -261,12 +269,13 @@ public class Database {
         return parts;
     }
 
+    @SuppressWarnings("Duplicates")
     public ObservableList<Part> selectAllPartsByName(String name){
         String sql = "SELECT id, name, price, stock FROM parts WHERE name = ?";
         ObservableList<Part> parts = FXCollections.observableArrayList();
 
         try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql); )
+             PreparedStatement pstmt = conn.prepareStatement(sql))
 
         {
             // loop through the result set
@@ -286,6 +295,7 @@ public class Database {
         return parts;
     }
 
+    @SuppressWarnings("Duplicates")
     public void updatePart(int id, String name, double price, int stock) {
         String sql = "UPDATE parts SET name = ? , "
                 + "price = ? ,"
@@ -312,6 +322,7 @@ public class Database {
         String url = "jdbc:sqlite:pbp.db";
 
         // SQL statement for creating a new table
+        @SuppressWarnings("all")
         String sql = "CREATE TABLE IF NOT EXISTS rents (\n"
                 + "	id integer PRIMARY KEY,\n"
                 + "	name text NOT NULL,\n"
@@ -343,6 +354,7 @@ public class Database {
         }
     }
 
+    @SuppressWarnings("Duplicates")
     public ObservableList<Rent> selectAllRents() {
         String sql = "SELECT id, name, stock, timeleft FROM rents";
         ObservableList<Rent> rents = FXCollections.observableArrayList();
@@ -365,12 +377,13 @@ public class Database {
         return rents;
     }
 
+    @SuppressWarnings("Duplicates")
     public ObservableList<Rent> selectAllRentsByName(String name){
         String sql = "SELECT id, name, stock, timeleft FROM rents WHERE name = ?";
         ObservableList<Rent> rents = FXCollections.observableArrayList();
 
         try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql); ) {
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             // loop through the result set
             pstmt.setString(1, name);
             ResultSet rs    = pstmt.executeQuery();

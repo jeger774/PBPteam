@@ -1,8 +1,8 @@
-# PBPteam
+# `<PBPteam>`
 [GitHub project page](http://github.com/jeger774/PBPteam)
 ### Sports rental and repair shop inventory management software.
 #### Changelog:
-* UI created
+* **UI created**
 * removed _some_ unnecessary lines of code
   * also fixed searching in tables
 * adding and modifying products and parts now work as intended
@@ -10,6 +10,12 @@
 * code refactoring
 * fat JAR build support added
 * tried hibernate for persistence, failed miserably
-* SQLite implemented for data persistence
-* UI updated to final state
+* **SQLite implemented for data persistence**
+* **UI updated to final state**
 * more code refactoring and cleanup
+* fixed delete (all tables), modify (part)
+* **added relation for stock of product and rent**
+* **added auto deletion of rent if related product is deleted**
+* fixed search
+* added annotations
+* misc. changes and code cleanup

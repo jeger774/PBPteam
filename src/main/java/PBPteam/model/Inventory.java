@@ -1,12 +1,11 @@
 package PBPteam.model;
 import PBPteam.Database;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Inventory {
     public static Database database = new Database();
 
-    //product
+    //termék kezelés
     public static ObservableList<Product> getProductsInventory(){
         return database.selectAllProducts();
     }
@@ -15,23 +14,17 @@ public class Inventory {
         database.deleteProduct(product.getProductId());
         database.deleteRent(product.getProductId());
     }
-
-    //listák
-    private static ObservableList<Part> partsInventory = FXCollections.observableArrayList();
-    private static ObservableList<Product> productsInventory = FXCollections.observableArrayList();
-    private static ObservableList<Rent> rentInventory = FXCollections.observableArrayList();
-
-    //termék kezelés
     public static ObservableList<Product> lookupProduct(String searchItem){
         return database.selectAllProductsByName(searchItem);
     }
 
     //termék frissítés metódus (ModifyProduct)
+    @SuppressWarnings("unused")
     public static void updateProduct(int productNum, Product product){
         database.updateProduct(product.getProductId(), product.getName(), product.getPrice(), product.getStock());
     }
 
-    //part
+    //alkatrész kezelés
     public static ObservableList<Part> getPartsInventory(){
         return database.selectAllPart();
     }
@@ -41,13 +34,12 @@ public class Inventory {
     public static void removePart(Part part){
         database.deletePart(part.getPartId());
     }
-
-    //alkatrész kezelés
     public static ObservableList<Part> lookupPart(String searchItem) {
         return database.selectAllPartsByName(searchItem);
     }
 
     //alkatrész frissítés metódus (ModifyPart)
+    @SuppressWarnings("unused")
     public static void updatePart(int partNum, Part part){
         database.updatePart(part.getPartId(), part.getName(), part.getPrice(), part.getStock());
     }
@@ -68,16 +60,6 @@ public class Inventory {
     }
 
     //kölcsön frissítés metódus (ExtendRentProduct)
-    public static void updateRent(int loanNum, Rent rent){
-        database.updateRent(rent.getProductId(), rent.getTimeLeft()); }
-
-    public static boolean isInteger(String inputItem){
-        try{
-            Integer.parseInt(inputItem);
-            return true;
-        }
-        catch (Exception exception){
-            return false;
-        }
-    }
+    @SuppressWarnings("unused")
+    public static void updateRent(int loanNum, Rent rent){ database.updateRent(rent.getProductId(), rent.getTimeLeft()); }
 }

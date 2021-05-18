@@ -9,10 +9,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -22,12 +20,6 @@ import java.util.ResourceBundle;
 
 public class ModifyPartController implements Initializable {
     @FXML
-    private AnchorPane modifyPartId;
-    @FXML
-    private Button saveButton;
-    @FXML
-    private Button cancelButton;
-    @FXML
     private TextField idTextField;
     @FXML
     private TextField nameTextField;
@@ -36,6 +28,8 @@ public class ModifyPartController implements Initializable {
     @FXML
     private TextField priceTextField;
 
+    //visszavonás
+    @SuppressWarnings("Duplicates")
     @FXML
     void handleModifyPartCancel(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -44,7 +38,7 @@ public class ModifyPartController implements Initializable {
         alert.setHeaderText("Megerősítés");
         alert.setContentText("Biztosan vissza akarja vonni a módosításokat?");
         Optional<ButtonType> outcome = alert.showAndWait();
-        if(outcome.get() == ButtonType.OK) {
+        if(outcome.orElse(null) == ButtonType.OK) {
             Parent modifyPartsScreen = FXMLLoader.load(getClass().getResource("Main.fxml"));
             Scene modifyPartsScene = new Scene(modifyPartsScreen);
             Stage modifyPartsStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -53,6 +47,7 @@ public class ModifyPartController implements Initializable {
         }
     }
 
+    //mentés
     @FXML
     void handleModifyPartSave(ActionEvent event) throws IOException {
         Part part = new Part();

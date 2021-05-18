@@ -10,10 +10,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -23,12 +21,6 @@ import java.util.ResourceBundle;
 
 public class RentProductController implements Initializable {
     @FXML
-    private AnchorPane rentProductId;
-    @FXML
-    private Button saveButton;
-    @FXML
-    private Button cancelButton;
-    @FXML
     private TextField idTextField;
     @FXML
     private TextField productTextField;
@@ -37,6 +29,8 @@ public class RentProductController implements Initializable {
     @FXML
     private TextField timeTextField;
 
+    //visszavonás
+    @SuppressWarnings("Duplicates")
     @FXML
     void handleCancelRentProduct(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -45,7 +39,7 @@ public class RentProductController implements Initializable {
         alert.setHeaderText("Megerősítés");
         alert.setContentText("Biztosan vissza akarja vonni a kölcsönzést?");
         Optional<ButtonType> outcome = alert.showAndWait();
-        if(outcome.get() == ButtonType.OK) {
+        if(outcome.orElse(null) == ButtonType.OK) {
             Parent rentProductScreen = FXMLLoader.load(getClass().getResource("Main.fxml"));
             Scene rentProductScene = new Scene(rentProductScreen);
             Stage rentProductStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -54,6 +48,7 @@ public class RentProductController implements Initializable {
         }
     }
 
+    //mentés
     @FXML
     void handleSaveRentProduct(ActionEvent event) throws IOException {
         Rent rent = new Rent();
