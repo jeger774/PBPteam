@@ -11,8 +11,9 @@ public class Inventory {
         return database.selectAllProducts();
     }
     public static void addProduct(Product product){ database.insertProduct(product.getName(), product.getPrice(), product.getStock()); }
-    public static void removeProduct(Product product){
+    public static void removeProduct(Product product) {
         database.deleteProduct(product.getProductId());
+        database.deleteRent(product.getProductId());
     }
 
     //listák
@@ -21,31 +22,8 @@ public class Inventory {
     private static ObservableList<Rent> rentInventory = FXCollections.observableArrayList();
 
     //termék kezelés
-    public static int lookupProduct(String searchItem){
-        boolean isFound = false;
-        int index = 0;
-        if(isInteger(searchItem)){
-            for(int i =0; i<productsInventory.size(); i++){
-                if(Integer.parseInt(searchItem) == productsInventory.get(i).getProductId()){
-                    index = i;
-                    isFound = true;
-                }
-            }
-        }
-        else{
-            for(int i =0; i<productsInventory.size(); i++) {
-                if (searchItem.equals(productsInventory.get(i).getName()))
-                    index = i;
-                isFound = true;
-            }
-        }
-        if(isFound){
-            return index;
-        }
-        else {
-            System.out.println("Nem található termék.");
-            return -1;
-        }
+    public static ObservableList<Product> lookupProduct(String searchItem){
+        return database.selectAllProductsByName(searchItem);
     }
 
     //termék frissítés metódus (ModifyProduct)
@@ -65,31 +43,8 @@ public class Inventory {
     }
 
     //alkatrész kezelés
-    public static int lookupPart(String searchItem) {
-        boolean isFound = false;
-        int index = 0;
-        if(isInteger(searchItem)){
-            for(int i =0; i<partsInventory.size(); i++){
-                if(Integer.parseInt(searchItem) == partsInventory.get(i).getPartId()){
-                    index = i;
-                    isFound = true;
-                }
-            }
-        }
-        else{
-            for(int i =0; i<partsInventory.size(); i++) {
-                if (searchItem.equals(partsInventory.get(i).getName()))
-                    index = i;
-                isFound = true;
-            }
-        }
-        if(isFound){
-            return index;
-        }
-        else {
-            System.out.println("Nem található alkatrész.");
-            return -1;
-        }
+    public static ObservableList<Part> lookupPart(String searchItem) {
+        return database.selectAllPartsByName(searchItem);
     }
 
     //alkatrész frissítés metódus (ModifyPart)
@@ -100,36 +55,16 @@ public class Inventory {
     //kölcsön kezelés
     public static ObservableList<Rent> getRentInventory(){ return database.selectAllRents(); }
     public static void addRent(Rent rent){
-        database.insertRent(rent.getName(), rent.getStock(), rent.getTimeLeft());
+        int stockrent = rent.getStock();
+        database.insertRent(rent.getName(), stockrent, rent.getTimeLeft());
+        Product product = database.selectProduct(rent.getName());
+        database.updateProductWhenRented(rent.getName(), product.getStock() - stockrent );
     }
     public static void removeRent(Rent rent){
         database.deleteRent(rent.getProductId());
     }
-    public static int lookupRent(String searchItem){
-        boolean isFound = false;
-        int index = 0;
-        if(isInteger(searchItem)){
-            for(int i = 0; i< rentInventory.size(); i++){
-                if(Integer.parseInt(searchItem) == rentInventory.get(i).getProductId()){
-                    index = i;
-                    isFound = true;
-                }
-            }
-        }
-        else{
-            for(int i = 0; i< rentInventory.size(); i++) {
-                if (searchItem.equals(rentInventory.get(i).getName()))
-                    index = i;
-                isFound = true;
-            }
-        }
-        if(isFound){
-            return index;
-        }
-        else {
-            System.out.println("Nem található termék.");
-            return -1;
-        }
+    public static ObservableList<Rent> lookupRent(String searchItem){
+        return database.selectAllRentsByName(searchItem);
     }
 
     //kölcsön frissítés metódus (ExtendRentProduct)

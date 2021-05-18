@@ -91,6 +91,53 @@ public class Database {
         return products;
     }
 
+    public ObservableList<Product> selectAllProductsByName(String name){
+        String sql = "SELECT id, name, price, stock FROM products WHERE name = ?";
+        ObservableList<Product> products = FXCollections.observableArrayList();
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql); )
+
+             {
+            // loop through the result set
+            pstmt.setString(1, name);
+                 ResultSet rs    = pstmt.executeQuery();
+            while (rs.next()) {
+                Product product = new Product();
+                product.setProductId(rs.getInt("id"));
+                product.setName(rs.getString("name"));
+                product.setStock(rs.getInt("stock"));
+                product.setPrice(rs.getDouble("price"));
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return products;
+    }
+
+    public Product selectProduct(String name) {
+        String sql = "SELECT id, name, price, stock FROM products WHERE name = ?";
+
+        Product product = new Product();
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            // set the corresponding param
+            pstmt.setString(1, name);
+
+            // execute the delete statement
+            ResultSet rs    = pstmt.executeQuery();
+            rs.next();
+            product.setProductId(rs.getInt("id"));
+            product.setName(rs.getString("name"));
+            product.setStock(rs.getInt("stock"));
+            product.setPrice(rs.getDouble("price"));
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return product;
+    }
+
     public void deleteProduct(int id) {
         String sql = "DELETE FROM products WHERE id = ?";
 
@@ -118,6 +165,22 @@ public class Database {
             pstmt.setDouble(2, price);
             pstmt.setInt(3, stock);
             pstmt.setInt(4, id);
+            // update
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void updateProductWhenRented(String name, int stock) {
+        String sql = "UPDATE products SET stock = ?  "
+                + "WHERE name = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            // set the corresponding param
+            pstmt.setInt(1, stock);
+            pstmt.setString(2, name);
             // update
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -198,6 +261,31 @@ public class Database {
         return parts;
     }
 
+    public ObservableList<Part> selectAllPartsByName(String name){
+        String sql = "SELECT id, name, price, stock FROM parts WHERE name = ?";
+        ObservableList<Part> parts = FXCollections.observableArrayList();
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql); )
+
+        {
+            // loop through the result set
+            pstmt.setString(1, name);
+            ResultSet rs    = pstmt.executeQuery();
+            while (rs.next()) {
+                Part part = new Part();
+                part.setPartId(rs.getInt("id"));
+                part.setName(rs.getString("name"));
+                part.setStock(rs.getInt("stock"));
+                part.setPrice(rs.getDouble("price"));
+                parts.add(part);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return parts;
+    }
+
     public void updatePart(int id, String name, double price, int stock) {
         String sql = "UPDATE parts SET name = ? , "
                 + "price = ? ,"
@@ -263,6 +351,31 @@ public class Database {
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             // loop through the result set
+            while (rs.next()) {
+                Rent rent = new Rent();
+                rent.setProductId(rs.getInt("id"));
+                rent.setName(rs.getString("name"));
+                rent.setStock(rs.getInt("stock"));
+                rent.setTimeLeft(rs.getString("timeleft"));
+                rents.add(rent);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return rents;
+    }
+
+    public ObservableList<Rent> selectAllRentsByName(String name){
+        String sql = "SELECT id, name, stock, timeleft FROM rents WHERE name = ?";
+        ObservableList<Rent> rents = FXCollections.observableArrayList();
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql); )
+
+        {
+            // loop through the result set
+            pstmt.setString(1, name);
+            ResultSet rs    = pstmt.executeQuery();
             while (rs.next()) {
                 Rent rent = new Rent();
                 rent.setProductId(rs.getInt("id"));

@@ -88,7 +88,7 @@ public class MainController implements Initializable {
     @FXML
     private void handlePartSearch(ActionEvent event){
         String searchedPart = partsSearchField.getText();
-        int tvPartIndex;
+        /*int tvPartIndex;
         if(Inventory.lookupPart(searchedPart) == -1){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Hiba a keresésben!");
@@ -105,7 +105,8 @@ public class MainController implements Initializable {
             ObservableList<Part> tempObservableList = FXCollections.observableArrayList();
             tempObservableList.add(tempSearchPart);
             tvParts.setItems(tempObservableList);
-        }
+        }*/
+        tvParts.setItems(Inventory.lookupPart(searchedPart));
     }
 
     @FXML
@@ -155,7 +156,7 @@ public class MainController implements Initializable {
     @FXML
     private void handleProductSearch(ActionEvent event){
         String searchedProduct = productsSearchField.getText();
-        int tvProductIndex;
+        /*int tvProductIndex;
         if(Inventory.lookupProduct(searchedProduct) == -1){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Hiba a keresésben!");
@@ -170,9 +171,9 @@ public class MainController implements Initializable {
             tvProductIndex = Inventory.lookupProduct(searchedProduct);
             Product tempSearchProduct = Inventory.getProductsInventory().get(tvProductIndex);
             ObservableList<Product> tempObservableList = FXCollections.observableArrayList();
-            tempObservableList.add(tempSearchProduct);
-            tvProducts.setItems(tempObservableList);
-        }
+            tempObservableList.add(tempSearchProduct);*/
+        tvProducts.setItems(Inventory.lookupProduct(searchedProduct));
+
     }
 
     @FXML
@@ -258,7 +259,7 @@ public class MainController implements Initializable {
     @FXML
     private void handleRentSearch(ActionEvent event){
         String searchedRent = rentSearchField.getText();
-        int tvRentIndex;
+        /*int tvRentIndex;
         if(Inventory.lookupRent(searchedRent) == -1){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Hiba a keresésben!");
@@ -275,7 +276,8 @@ public class MainController implements Initializable {
             ObservableList<Rent> tempObservableList = FXCollections.observableArrayList();
             tempObservableList.add(tempSearchRent);
             tvRent.setItems(tempObservableList);
-        }
+        }*/
+        tvRent.setItems(Inventory.lookupRent(searchedRent));
     }
 
     @FXML
