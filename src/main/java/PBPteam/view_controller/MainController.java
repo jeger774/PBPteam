@@ -88,25 +88,8 @@ public class MainController implements Initializable {
     @FXML
     private void handlePartSearch(ActionEvent event){
         String searchedPart = partsSearchField.getText();
-        /*int tvPartIndex;
-        if(Inventory.lookupPart(searchedPart) == -1){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Hiba a keresésben!");
-            alert.setHeaderText("Nem található ilyen alkatrész.");
-            alert.setContentText("A megadott keresőszóra nincs egyező alkatrész.");
-            alert.showAndWait();
-        }
-        else if(searchedPart.equals("")){
-            tvParts.setItems(Inventory.getPartsInventory());
-        }
-        else{
-            tvPartIndex = Inventory.lookupPart(searchedPart);
-            Part tempSearchPart = Inventory.getPartsInventory().get(tvPartIndex);
-            ObservableList<Part> tempObservableList = FXCollections.observableArrayList();
-            tempObservableList.add(tempSearchPart);
-            tvParts.setItems(tempObservableList);
-        }*/
-        tvParts.setItems(Inventory.lookupPart(searchedPart));
+        if(searchedPart.equals("")) { tvParts.setItems(Inventory.getPartsInventory()); }
+        else tvParts.setItems(Inventory.lookupPart(searchedPart));
     }
 
     @FXML
@@ -156,24 +139,8 @@ public class MainController implements Initializable {
     @FXML
     private void handleProductSearch(ActionEvent event){
         String searchedProduct = productsSearchField.getText();
-        /*int tvProductIndex;
-        if(Inventory.lookupProduct(searchedProduct) == -1){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Hiba a keresésben!");
-            alert.setHeaderText("Nem található ilyen termék.");
-            alert.setContentText("A megadott keresőszóra nincs egyező termék.");
-            alert.showAndWait();
-        }
-        else if(searchedProduct.equals("")){
-            tvProducts.setItems(Inventory.getProductsInventory());
-        }
-        else{
-            tvProductIndex = Inventory.lookupProduct(searchedProduct);
-            Product tempSearchProduct = Inventory.getProductsInventory().get(tvProductIndex);
-            ObservableList<Product> tempObservableList = FXCollections.observableArrayList();
-            tempObservableList.add(tempSearchProduct);*/
-        tvProducts.setItems(Inventory.lookupProduct(searchedProduct));
-
+        if(searchedProduct.equals("")) { tvProducts.setItems(Inventory.getProductsInventory()); }
+        else tvProducts.setItems(Inventory.lookupProduct(searchedProduct));
     }
 
     @FXML
@@ -217,6 +184,7 @@ public class MainController implements Initializable {
             inventoryProductsColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
             priceProductsUnitColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
             tvProducts.setItems(Inventory.getProductsInventory());
+            tvRent.setItems(Inventory.getRentInventory());
         }
     }
 
@@ -259,25 +227,8 @@ public class MainController implements Initializable {
     @FXML
     private void handleRentSearch(ActionEvent event){
         String searchedRent = rentSearchField.getText();
-        /*int tvRentIndex;
-        if(Inventory.lookupRent(searchedRent) == -1){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Hiba a keresésben!");
-            alert.setHeaderText("Nem található ilyen kölcsönzés.");
-            alert.setContentText("A megadott keresőszóra nincs egyező kölcsönzés.");
-            alert.showAndWait();
-        }
-        else if(searchedRent.equals("")){
-            tvRent.setItems(Inventory.getRentInventory());
-        }
-        else{
-            tvRentIndex = Inventory.lookupProduct(searchedRent);
-            Rent tempSearchRent = Inventory.getRentInventory().get(tvRentIndex);
-            ObservableList<Rent> tempObservableList = FXCollections.observableArrayList();
-            tempObservableList.add(tempSearchRent);
-            tvRent.setItems(tempObservableList);
-        }*/
-        tvRent.setItems(Inventory.lookupRent(searchedRent));
+        if(searchedRent.equals("")) { tvRent.setItems(Inventory.getRentInventory()); }
+        else tvRent.setItems(Inventory.lookupRent(searchedRent));
     }
 
     @FXML

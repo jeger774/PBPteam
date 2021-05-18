@@ -370,9 +370,7 @@ public class Database {
         ObservableList<Rent> rents = FXCollections.observableArrayList();
 
         try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql); )
-
-        {
+             PreparedStatement pstmt = conn.prepareStatement(sql); ) {
             // loop through the result set
             pstmt.setString(1, name);
             ResultSet rs    = pstmt.executeQuery();
@@ -399,11 +397,9 @@ public class Database {
             pstmt.setInt(1, id);
             // execute the delete statement
             pstmt.executeUpdate();
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
     }
 
     public void updateRent(int id, String timeleft) {
