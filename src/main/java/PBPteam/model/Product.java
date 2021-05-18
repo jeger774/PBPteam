@@ -1,10 +1,7 @@
 package PBPteam.model;
 import javafx.beans.property.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 public class Product {
-    private static ObservableList<Part> parts = FXCollections.observableArrayList();
     private final IntegerProperty productId;
     private final StringProperty name;
     private final DoubleProperty price;
@@ -43,15 +40,6 @@ public class Product {
     }
     public int getStock() {
         return stock.get();
-    }
-
-    //metódusok hozzáadáshoz és törléshez
-    public void addPart(Part part){
-        parts.add(part);
-    }
-    public boolean removePart(int partNum){
-        parts.remove(partNum);
-        return true;
     }
 }
 

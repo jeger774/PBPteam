@@ -62,10 +62,10 @@ public class ModifyProductController implements Initializable {
         product.setPrice(Double.parseDouble(priceTextField.getText()));
         Inventory.updateProduct(MainController.getModifyProductIndex(), product);
         Parent modifyProductScreen = FXMLLoader.load(getClass().getResource("Main.fxml"));
-        Scene addPartsScene = new Scene(modifyProductScreen);
-        Stage addPartsStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        addPartsStage.setScene((addPartsScene));
-        addPartsStage.show();
+        Scene modifyProductScene = new Scene(modifyProductScreen);
+        Stage modifyProductStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        modifyProductStage.setScene((modifyProductScene));
+        modifyProductStage.show();
     }
 
     //megnyitáskor a mezők inicializálása

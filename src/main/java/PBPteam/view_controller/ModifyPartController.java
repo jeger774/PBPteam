@@ -40,16 +40,16 @@ public class ModifyPartController implements Initializable {
     void handleModifyPartCancel(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.initModality(Modality.NONE);
-        alert.setTitle("Módosítások visszavonása");
+        alert.setTitle("Visszavonás megerősítése");
         alert.setHeaderText("Megerősítés");
         alert.setContentText("Biztosan vissza akarja vonni a módosításokat?");
         Optional<ButtonType> outcome = alert.showAndWait();
         if(outcome.get() == ButtonType.OK) {
-            Parent addPartsScreen = FXMLLoader.load(getClass().getResource("Main.fxml"));
-            Scene addPartsScene = new Scene(addPartsScreen);
-            Stage addPartsStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            addPartsStage.setScene((addPartsScene));
-            addPartsStage.show();
+            Parent modifyPartsScreen = FXMLLoader.load(getClass().getResource("Main.fxml"));
+            Scene modifyPartsScene = new Scene(modifyPartsScreen);
+            Stage modifyPartsStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            modifyPartsStage.setScene((modifyPartsScene));
+            modifyPartsStage.show();
         }
     }
 
@@ -60,12 +60,12 @@ public class ModifyPartController implements Initializable {
         part.setName(nameTextField.getText());
         part.setStock(Integer.parseInt(inventoryTextField.getText()));
         part.setPrice(Double.parseDouble(priceTextField.getText()));
-        Inventory.updatePart(MainController.getModifyPartIndex(),part);
+        Inventory.updatePart(MainController.getModifyPartIndex(), part);
         Parent modifyPartsScreen = FXMLLoader.load(getClass().getResource("Main.fxml"));
-        Scene addPartsScene = new Scene(modifyPartsScreen);
-        Stage addPartsStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        addPartsStage.setScene((addPartsScene));
-        addPartsStage.show();
+        Scene modifyPartsScene = new Scene(modifyPartsScreen);
+        Stage modifyPartsStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        modifyPartsStage.setScene((modifyPartsScene));
+        modifyPartsStage.show();
     }
 
     //megnyitáskor a mezők inicializálása
@@ -77,5 +77,4 @@ public class ModifyPartController implements Initializable {
         inventoryTextField.setText(String.valueOf(partToBeModified.getStock()));
         priceTextField.setText(String.valueOf(partToBeModified.getPrice()));
     }
-
 }

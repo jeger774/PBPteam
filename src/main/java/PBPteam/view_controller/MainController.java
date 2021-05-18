@@ -51,23 +51,23 @@ public class MainController implements Initializable {
     @FXML
     private TableView<Product> tvProducts;
     @FXML
-    private TableColumn<Part, Integer> productsIDColumn;
+    private TableColumn<Product, Integer> productsIDColumn;
     @FXML
-    private TableColumn<Part, String> productsNameColumn;
+    private TableColumn<Product, String> productsNameColumn;
     @FXML
-    private TableColumn<Part, Integer> inventoryProductsColumn;
+    private TableColumn<Product, Integer> inventoryProductsColumn;
     @FXML
-    private TableColumn<Part, Double> priceProductsUnitColumn;
+    private TableColumn<Product, Double> priceProductsUnitColumn;
     @FXML
     private TableView<Rent> tvRent;
     @FXML
-    private TableColumn<Part, Integer> rentIDColumn;
+    private TableColumn<Rent, Integer> rentIDColumn;
     @FXML
-    private TableColumn<Part, String> rentNameColumn;
+    private TableColumn<Rent, String> rentNameColumn;
     @FXML
-    private TableColumn<Part, Integer> countRentUnitColumn;
+    private TableColumn<Rent, Integer> countRentUnitColumn;
     @FXML
-    private TableColumn<Part, String> timeRentUnitColumn;
+    private TableColumn<Rent, String> timeRentUnitColumn;
 
     private static int modifyPartIndex;
     private static int modifyProductIndex;
@@ -84,11 +84,6 @@ public class MainController implements Initializable {
         return extendRentIndex;
     }
     public static int getRentProductIndex(){ return rentProductIndex; }
-
-    private static Part modifiedPart;
-    private static Product modifiedProduct;
-    private static Rent extendedRent;
-    private static Product rentedProduct;
 
     @FXML
     private void handlePartSearch(ActionEvent event){
@@ -116,19 +111,18 @@ public class MainController implements Initializable {
     @FXML
     public void handleGoToModifyParts(ActionEvent event)throws IOException{
         Part tempPart = tvParts.getSelectionModel().getSelectedItem();
-       //modifyPartIndex = Inventory.getPartsInventory().indexOf(tempPart);
         ObservableList<Part> parts = Inventory.getPartsInventory();
         modifyPartIndex = 0;
-        for (modifyPartIndex = 0; modifyPartIndex < parts.size(); ++modifyProductIndex ){
-            if (parts.get(modifyProductIndex).getPartId() == tempPart.getPartId()){
+        for (modifyPartIndex = 0; modifyPartIndex < parts.size(); ++modifyPartIndex ){
+            if (parts.get(modifyPartIndex).getPartId() == tempPart.getPartId()){
                 break;
             }
         }
-        Parent addPartsScreen = FXMLLoader.load(getClass().getResource("ModifyPart.fxml"));
-        Scene addPartsScene = new Scene(addPartsScreen);
-        Stage addPartsStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        addPartsStage.setScene((addPartsScene));
-        addPartsStage.show();
+        Parent modifyPartsScreen = FXMLLoader.load(getClass().getResource("ModifyPart.fxml"));
+        Scene modifyPartsScene = new Scene(modifyPartsScreen);
+        Stage modifyPartsStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        modifyPartsStage.setScene((modifyPartsScene));
+        modifyPartsStage.show();
     }
 
     @FXML
@@ -179,13 +173,11 @@ public class MainController implements Initializable {
             tempObservableList.add(tempSearchProduct);
             tvProducts.setItems(tempObservableList);
         }
-
     }
 
     @FXML
     private void handleGoToModifyProducts(ActionEvent event)throws IOException{
         Product tempProduct = tvProducts.getSelectionModel().getSelectedItem();
-        //modifyProductIndex = Inventory.getProductsInventory().indexOf(tempProduct);
         ObservableList<Product> products = Inventory.getProductsInventory();
         modifyProductIndex = 0;
         for (modifyProductIndex = 0; modifyProductIndex < products.size(); ++modifyProductIndex ){
@@ -193,12 +185,11 @@ public class MainController implements Initializable {
                 break;
             }
         }
-        Parent addPartsScreen = FXMLLoader.load(getClass().getResource("ModifyProduct.fxml"));
-        Scene addPartsScene = new Scene(addPartsScreen);
-        Stage addPartsStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        addPartsStage.setScene((addPartsScene));
-        addPartsStage.show();
-        modifiedPart = tvParts.getSelectionModel().getSelectedItem();
+        Parent modifyProductScreen = FXMLLoader.load(getClass().getResource("ModifyProduct.fxml"));
+        Scene modifyProductScene = new Scene(modifyProductScreen);
+        Stage modifyProductStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        modifyProductStage.setScene((modifyProductScene));
+        modifyProductStage.show();
     }
 
     @FXML
@@ -262,7 +253,6 @@ public class MainController implements Initializable {
         Stage extendRentProductStage = (Stage)((Node)event.getSource()).getScene().getWindow();
         extendRentProductStage.setScene((extendRentProductScene));
         extendRentProductStage.show();
-        extendedRent = tvRent.getSelectionModel().getSelectedItem();
     }
 
     @FXML

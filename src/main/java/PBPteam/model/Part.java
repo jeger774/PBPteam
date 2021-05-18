@@ -7,11 +7,11 @@ public class Part {
     private final DoubleProperty price;
     private final IntegerProperty stock;
 
-    public Part(){
-        partId  = new SimpleIntegerProperty();
+    public Part() {
+        partId = new SimpleIntegerProperty();
         name = new SimpleStringProperty();
         price = new SimpleDoubleProperty();
-        stock  = new SimpleIntegerProperty();
+        stock = new SimpleIntegerProperty();
     }
 
     //set
@@ -29,7 +29,7 @@ public class Part {
     }
 
     //get
-    public Integer getPartId() {
+    public int getPartId() {
         return partId.get();
     }
     public String getName() {
@@ -40,19 +40,5 @@ public class Part {
     }
     public int getStock() {
         return stock.get();
-    }
-
-    //hibaellenőrzés, egyelőre nincs használva
-    public static String isValidPart(String name, int inv, double price, String error){
-        if(name == null){
-            error = error +"A név megadása kötelező.";
-        }
-        else if(inv < 1){
-            error = error + "A készlet nem lehet kevesebb mint 1.";
-        }
-        else if(price <= 0){
-            error = error + "Az ár nem lehet <=0 Ft.";
-        }
-        return error ;
     }
 }

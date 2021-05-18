@@ -72,15 +72,15 @@ public class Database {
     public ObservableList<Product> selectAllProducts(){
         String sql = "SELECT id, name, price, stock FROM products";
         ObservableList<Product> products = FXCollections.observableArrayList();
+
         try (Connection conn = this.connect();
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){
-
             // loop through the result set
             while (rs.next()) {
                 Product product = new Product();
                 product.setProductId(rs.getInt("id"));
-                product.setName( rs.getString("name"));
+                product.setName(rs.getString("name"));
                 product.setStock(rs.getInt("stock"));
                 product.setPrice(rs.getDouble("price"));
                 products.add(product);

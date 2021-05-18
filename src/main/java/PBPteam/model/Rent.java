@@ -4,6 +4,7 @@ import javafx.beans.property.StringProperty;
 
 public class Rent extends Product {
     private final StringProperty timeLeft;
+
     public Rent() {
         super();
         timeLeft = new SimpleStringProperty();

@@ -4,19 +4,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Inventory {
-    //product
     public static Database database = new Database();
 
-    public static void addProduct(Product product){
-        database.insertProduct(product.getName(), product.getPrice(), product.getStock());
-    }
+    //product
     public static ObservableList<Product> getProductsInventory(){
         return database.selectAllProducts();
     }
+    public static void addProduct(Product product){ database.insertProduct(product.getName(), product.getPrice(), product.getStock()); }
     public static void removeProduct(Product product){
         database.deleteProduct(product.getProductId());
     }
 
+    //listák
     private static ObservableList<Part> partsInventory = FXCollections.observableArrayList();
     private static ObservableList<Product> productsInventory = FXCollections.observableArrayList();
     private static ObservableList<Rent> rentInventory = FXCollections.observableArrayList();
@@ -54,7 +53,7 @@ public class Inventory {
         database.updateProduct(product.getProductId(), product.getName(), product.getPrice(), product.getStock());
     }
 
-    //alkatrész kezelés
+    //part
     public static ObservableList<Part> getPartsInventory(){
         return database.selectAllPart();
     }
@@ -64,6 +63,8 @@ public class Inventory {
     public static void removePart(Part part){
         database.deletePart(part.getPartId());
     }
+
+    //alkatrész kezelés
     public static int lookupPart(String searchItem) {
         boolean isFound = false;
         int index = 0;
@@ -97,8 +98,7 @@ public class Inventory {
     }
 
     //kölcsön kezelés
-    public static ObservableList<Rent> getRentInventory(){
-        return database.selectAllRents(); }
+    public static ObservableList<Rent> getRentInventory(){ return database.selectAllRents(); }
     public static void addRent(Rent rent){
         database.insertRent(rent.getName(), rent.getStock(), rent.getTimeLeft());
     }
@@ -135,6 +135,7 @@ public class Inventory {
     //kölcsön frissítés metódus (ExtendRentProduct)
     public static void updateRent(int loanNum, Rent rent){
         database.updateRent(rent.getProductId(), rent.getTimeLeft()); }
+
     public static boolean isInteger(String inputItem){
         try{
             Integer.parseInt(inputItem);
