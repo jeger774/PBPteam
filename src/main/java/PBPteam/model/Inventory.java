@@ -53,6 +53,9 @@ public class Inventory {
         database.updateProductWhenRented(rent.getName(), product.getStock() - stockrent );
     }
     public static void removeRent(Rent rent){
+        int stockrent = rent.getStock();
+        Product product = database.selectProduct(rent.getName());
+        database.updateProductWhenRented(rent.getName(), product.getStock() + stockrent );
         database.deleteRent(rent.getName());
     }
     public static ObservableList<Rent> lookupRent(String searchItem){
