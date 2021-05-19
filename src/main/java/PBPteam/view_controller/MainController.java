@@ -247,6 +247,7 @@ public class MainController implements Initializable {
             countRentUnitColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
             timeRentUnitColumn.setCellValueFactory(new PropertyValueFactory<>("timeLeft"));
             tvRent.setItems(Inventory.getRentInventory());
+            tvProducts.setItems(Inventory.getProductsInventory());
         }
     }
 
